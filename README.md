@@ -6,6 +6,7 @@
 ```sh
 $ cd frontend/ && npm install
 $ cd backend/api/ && npm install
+$ cd backend/websocket/ && npm install
 $ cd backend/fileServer/ && npm install
 ```
 
@@ -23,6 +24,8 @@ $ docker-compose up
 
 If `docker-compose` fails to connect to the Docker daemon, ensure the Docker daemon is up (`sudo dockerd`). Althernatively, you can use npm / pm2.
 
+- Websocket HTTP: `http://localhost:5080/`
+- Websocket HTTP: `https://localhost:5443/`
 - API HTTP: `http://localhost:6080/`
 - API HTTP: `https://localhost:6443/`
 - FileServer HTTP: `http://localhost:4080/`
