@@ -6,7 +6,8 @@
     "parcel-bundler": "^1.12.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "websocket": "^1.0.31"
   },
   "scripts": {
     "build-watch": "parcel watch ./public/*.html -d ./build/",
