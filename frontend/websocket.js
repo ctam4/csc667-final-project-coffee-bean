@@ -1,5 +1,4 @@
 import { client as WebSocketClient } from 'websocket';
-
 const client = new WebSocketClient();
 
 let websocketUrl = 'ws://' + process.env.WEBSOCKET_HOST || window.location.hostname;
