@@ -4,6 +4,9 @@ import {
     CLEAR_CART,
     FETCH_ORDERS,
     FETCH_ORDER,
+    USER_SET_EMAIL,
+    USER_SET_PASSWORD,
+    USER_SET_LOGIN,
 } from './types'
 
 export const addItem = (item) => {
@@ -33,3 +36,19 @@ export const fetchOrders = () => {
 export const fetchOrder = (id) => {
     console.log("FETCHING ORDER WITH ID: " + id);
 }
+
+export const setEmail = email => ({
+    type: USER_SET_EMAIL,
+    email: email,
+  });
+  
+  export const setPassword = password => ({
+    type: USER_SET_PASSWORD,
+    password: password,
+  });
+  
+  export const setIsLoggedIn = isLoggedIn => ({
+    type: USER_SET_LOGIN,
+    isLoggedIn: isLoggedIn,
+  });
+  
