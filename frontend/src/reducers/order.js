@@ -1,6 +1,6 @@
 import {
-  FETCH_ORDERS,
-  FETCH_ORDER,
+  ORDER_FETCH_ORDERS,
+  ORDER_FETCH_ORDER,
  } from '../actions/types';
 
 //so orderHistory is an object that stores amount of orders the user has purchased and each order index represents and order of that time.
@@ -21,12 +21,12 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_ORDER:
+    case ORDER_FETCH_ORDER:
       return {
         ...state,
         test: 'testing value',
       };
-    case FETCH_ORDERS:
+    case ORDER_FETCH_ORDERS:
       return {
         ...state,
         test: 'DUMMY DATA',

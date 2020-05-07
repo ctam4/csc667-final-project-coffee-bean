@@ -1,7 +1,7 @@
 import {
-  USER_SET_LOGIN,
-  USER_SET_PASSWORD,
   USER_SET_EMAIL,
+  USER_SET_PASSWORD,
+  USER_SET_ISLOGGEDIN,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -22,7 +22,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         password: action.password,
       };
-    case USER_SET_LOGIN:
+    case USER_SET_ISLOGGEDIN:
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,

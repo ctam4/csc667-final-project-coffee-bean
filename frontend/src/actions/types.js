@@ -1,10 +1,10 @@
-export const ADD_ITEM = 'ADD_ITEM';
-export const REMOVE_ITEM = 'REMOVE_ITEM';
-export const CLEAR_CART = 'CLEAR_CART';
+export const CART_ADD_ITEM = 'CART_ADD_ITEM';
+export const CART_REMOVE_ITEM = 'CART_REMOVE_ITEM';
+export const CART_CLEAR = 'CART_CLEAR';
 
-export const FETCH_ORDERS = 'FETCH_ORDERS';
-export const FETCH_ORDER = 'FETCH_ORDER';
+export const ORDER_FETCH_ORDERS = 'ORDER_FETCH_ORDERS';
+export const ORDER_FETCH_ORDER = 'ORDER_FETCH_ORDER';
 
 export const USER_SET_EMAIL = 'USER_SET_EMAIL';
 export const USER_SET_PASSWORD = 'USER_SET_PASSWORD';
-export const USER_SET_LOGIN = 'USER_SET_LOGIN';
+export const USER_SET_ISLOGGEDIN = 'USER_SET_ISLOGGEDIN';

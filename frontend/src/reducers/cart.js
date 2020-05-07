@@ -1,7 +1,7 @@
 import {
-  ADD_ITEM,
-  REMOVE_ITEM,
-  CLEAR_CART,
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_CLEAR,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,7 +19,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ADD_ITEM:
+    case CART_ADD_ITEM:
       return {
         ...state,
         items: [
@@ -27,13 +27,13 @@ export default (state = INITIAL_STATE, action) => {
           action.payload,
         ],
       };
-    case REMOVE_ITEM:
+    case CART_REMOVE_ITEM:
       console.log('CALLED REMOVING ITEM REDUCER');
       return {
         ...state,
         items: state.items.filter((item, idx) => idx !== action.payload),
       };
-    case CLEAR_CART:
+    case CART_CLEAR:
       return {
         ...state,
         price: 0,

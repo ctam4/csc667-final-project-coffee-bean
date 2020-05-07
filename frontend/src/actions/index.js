@@ -1,31 +1,31 @@
 import {
-  ADD_ITEM,
-  REMOVE_ITEM,
-  CLEAR_CART,
-  FETCH_ORDERS,
-  FETCH_ORDER,
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_CLEAR,
+  ORDER_FETCH_ORDERS,
+  ORDER_FETCH_ORDER,
   USER_SET_EMAIL,
   USER_SET_PASSWORD,
-  USER_SET_LOGIN,
+  USER_SET_ISLOGGEDIN,
 } from './types';
 
 export const addItem = (item) => {
   return {
-    type: ADD_ITEM,
+    type: CART_ADD_ITEM,
     payload: item,
   };
 };
 
 export const removeItem = (itemId) => {
   return {
-    type: REMOVE_ITEM,
+    type: CART_REMOVE_ITEM,
     payload: itemId,
   };
 };
 
 export const clearCart = () => {
   return {
-    type: CLEAR_CART,
+    type: CART_CLEAR,
   };
 };
 
@@ -48,6 +48,6 @@ export const setPassword = (password) => ({
 });
 
 export const setIsLoggedIn = (isLoggedIn) => ({
-  type: USER_SET_LOGIN,
+  type: USER_SET_ISLOGGEDIN,
   isLoggedIn: isLoggedIn,
 });
