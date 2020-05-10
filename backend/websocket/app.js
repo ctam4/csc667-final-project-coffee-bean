@@ -1,6 +1,7 @@
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
+
 const httpPort = 5080;
 const httpsPort = 5443;
 const httpsOptions = {
@@ -14,13 +15,11 @@ const websocketOptions = {
   autoAcceptConnections: false,
 };
 const websocketServer = require('websocket').server;
+
 const app = new websocketServer(websocketOptions);
 
-const originIsAllowed = (origin) => {
-  // put logic here to detect whether the specified origin is allowed.
-  return true;
-};
-
+// put logic here to detect whether the specified origin is allowed.
+const originIsAllowed = (origin) => true;
 app.on('request', (request) => {
   if (!originIsAllowed(request.origin)) {
     // Make sure we only accept requests from an allowed origin
@@ -28,14 +27,13 @@ app.on('request', (request) => {
     // console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
     return;
   }
-  let connection = request.accept('echo-protocol', request.origin);
+  const connection = request.accept('echo-protocol', request.origin);
   // console.log((new Date()) + ' Connection accepted.');
   connection.on('message', (message) => {
     if (message.type === 'utf8') {
       // console.log('Received Message: ' + message.utf8Data);
       connection.sendUTF(message.utf8Data);
-    }
-    else if (message.type === 'binary') {
+    } else if (message.type === 'binary') {
       // console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
       connection.sendBytes(message.binaryData);
     }
@@ -45,5 +43,5 @@ app.on('request', (request) => {
   });
 });
 
-httpServer.listen(httpPort)
+httpServer.listen(httpPort);
 httpsServer.listen(httpsPort);

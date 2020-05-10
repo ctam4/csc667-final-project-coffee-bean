@@ -9,45 +9,39 @@ import {
   USER_SET_ISLOGGEDIN,
 } from './types';
 
-export const addItem = (item) => {
-  return {
-    type: CART_ADD_ITEM,
-    payload: item,
-  };
-};
+export const addItem = (item) => ({
+  type: CART_ADD_ITEM,
+  payload: item,
+});
 
-export const removeItem = (itemId) => {
-  return {
-    type: CART_REMOVE_ITEM,
-    payload: itemId,
-  };
-};
+export const removeItem = (itemId) => ({
+  type: CART_REMOVE_ITEM,
+  payload: itemId,
+});
 
-export const clearCart = () => {
-  return {
-    type: CART_CLEAR,
-  };
-};
+export const clearCart = () => ({
+  type: CART_CLEAR,
+});
 
 export const fetchOrders = () => {
   console.log('FETCHING ALL ORDERS TEST');
 };
 
 export const fetchOrder = (id) => {
-  console.log('FETCHING ORDER WITH ID: ' + id);
+  console.log(`FETCHING ORDER WITH ID: ${id}`);
 };
 
 export const setEmail = (email) => ({
   type: USER_SET_EMAIL,
-  email: email,
+  email,
 });
 
 export const setPassword = (password) => ({
   type: USER_SET_PASSWORD,
-  password: password,
+  password,
 });
 
 export const setIsLoggedIn = (isLoggedIn) => ({
   type: USER_SET_ISLOGGEDIN,
-  isLoggedIn: isLoggedIn,
+  isLoggedIn,
 });

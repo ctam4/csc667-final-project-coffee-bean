@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../src/App.jsx';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
+import App from '../src/App';
 import reducers from '../src/reducers';
 
-//Redux DevTools to monitor states
+// Redux DevTools to monitor states
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
@@ -21,5 +21,5 @@ ReactDOM.hydrate(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById('react-root')
+  document.getElementById('react-root'),
 );
