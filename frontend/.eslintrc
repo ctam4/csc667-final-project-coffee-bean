@@ -1,4 +1,4 @@
 {
-  "plugin": ["react-redux"],
+  "plugins": ["react-redux"],
   "extends": ["airbnb", "airbnb/hooks", "plugin:react-redux/recommended"]
 }
