@@ -7,13 +7,13 @@ switch (window.location.protocol) {
   case 'http:':
     port = process.env.WEBSOCKET_HTTP_PORT || window.location.port;
     if (port !== 80) {
-      websocketUrl += ":" + port;
+      websocketUrl += ':' + port;
     }
     break;
   case 'https:':
     port = process.env.WEBSOCKET_HTTPS_PORT || window.location.port;
     if (port !== 443) {
-      websocketUrl += ":" + port;
+      websocketUrl += ':' + port;
     }
     break;
 }
@@ -29,14 +29,14 @@ client.on('connectFailed', function(error) {
 client.on('connect', function(connection) {
   console.log('WebSocket Client Connected');
   connection.on('error', function(error) {
-    console.log("Connection Error: " + error.toString());
+    console.log('Connection Error: ' + error.toString());
   });
   connection.on('close', function() {
     console.log('echo-protocol Connection Closed');
   });
   connection.on('message', function(message) {
     if (message.type === 'utf8') {
-      console.log("Received: '" + message.utf8Data + "'");
+      console.log('Received: '' + message.utf8Data + ''');
     }
   });
 

@@ -1,19 +1,21 @@
-let apiUrl = window.location.protocol + '//' + (process.env.API_HOST || window.location.hostname);
+let url;
 let port;
+url = window.location.protocol + '//' + (process.env.API_HOST || window.location.hostname);
 switch (window.location.protocol) {
   case 'http:':
     port = process.env.API_HTTP_PORT || window.location.port;
     if (port !== 80) {
-      apiUrl += ":" + port;
+      url += ':' + port;
     }
     break;
   case 'https:':
     port = process.env.API_HTTPS_PORT || window.location.port;
     if (port !== 443) {
-      apiUrl += ":" + port;
+      url += ':' + port;
     }
     break;
 }
-apiUrl += '/';
+url += '/';
 
+const apiUrl = url;
 export default apiUrl;
