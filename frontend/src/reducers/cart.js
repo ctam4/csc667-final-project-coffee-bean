@@ -1,8 +1,4 @@
-import {
-  CART_ADD_ITEM,
-  CART_REMOVE_ITEM,
-  CART_CLEAR,
-} from '../actions/types';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_CLEAR, } from '../actions/types';
 
 const INITIAL_STATE = {
   price: 0,
