@@ -3,7 +3,7 @@ const mongodb = require('mongodb');
 const mongodbOptions = {
   host: process.env.MONGODB_HOST || 'localhost',
   port: process.env.MONGODB_PORT || '27017',
-  db: (process.env.MONGODB_DATABASE && `/${process.env.MONGODB_DATABASE}`) || '',
+  db: process.env.MONGODB_DATABASE || '',
 };
 
 module.exports = (async () => {
@@ -11,6 +11,6 @@ module.exports = (async () => {
   await connection.connect();
   return {
     connection,
-    db: await connection.db(mongodbOptions.db),
+    db: (mongodbOptions.db && await connection.db(mongodbOptions.db)) || null,
   };
 })();
