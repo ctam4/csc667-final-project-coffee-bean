@@ -7,9 +7,10 @@ const mongodbOptions = {
 };
 
 module.exports = (async () => {
-  const connection = await new mongodb.MongoClient(`mongodb://${mongodbOptions.host}:${mongodbOptions.port}`, { useNewUrlParser: true }).connect();
+  const connection = new mongodb.MongoClient(`mongodb://${mongodbOptions.host}:${mongodbOptions.port}`, { useNewUrlParser: true });
+  await connection.connect();
   return {
     connection,
-    db: connection.db(mongodbOptions.db),
+    db: await connection.db(mongodbOptions.db),
   };
 })();
