@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_CLEAR, } from '../actions/types';
+import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_CLEAR } from '../actions/types';
 
 const INITIAL_STATE = {
   price: 0,
@@ -24,7 +24,6 @@ export default (state = INITIAL_STATE, action) => {
         ],
       };
     case CART_REMOVE_ITEM:
-      console.log('CALLED REMOVING ITEM REDUCER');
       return {
         ...state,
         items: state.items.filter((item, idx) => idx !== action.payload),

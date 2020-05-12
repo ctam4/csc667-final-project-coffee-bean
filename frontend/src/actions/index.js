@@ -1,4 +1,13 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_CLEAR, ORDER_FETCH_ORDERS, ORDER_FETCH_ORDER, USER_SET_EMAIL, USER_SET_PASSWORD, USER_SET_ISLOGGEDIN, } from './types';
+import {
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
+  CART_CLEAR,
+  ORDER_FETCH_ORDERS,
+  ORDER_FETCH_ORDER,
+  USER_SET_EMAIL,
+  USER_SET_PASSWORD,
+  USER_SET_ISLOGGEDIN,
+} from './types';
 
 export const addItem = (item) => ({
   type: CART_ADD_ITEM,
@@ -15,11 +24,11 @@ export const clearCart = () => ({
 });
 
 export const fetchOrders = () => {
-  console.log('FETCHING ALL ORDERS TEST');
+  // console.log('FETCHING ALL ORDERS TEST');
 };
 
 export const fetchOrder = (id) => {
-  console.log(`FETCHING ORDER WITH ID: ${id}`);
+  // console.log(`FETCHING ORDER WITH ID: ${id}`);
 };
 
 export const setEmail = (email) => ({
