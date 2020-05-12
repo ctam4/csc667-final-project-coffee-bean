@@ -3,8 +3,6 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
   isLoggedIn: false,
 };
 
