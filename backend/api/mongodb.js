@@ -7,7 +7,7 @@ const mongodbOptions = {
 };
 
 module.exports = (async () => {
-  const connection = new mongodb.MongoClient(`mongodb://${mongodbOptions.host}:${mongodbOptions.port}`, { useNewUrlParser: true });
+  const connection = new mongodb.MongoClient(`mongodb://${mongodbOptions.host}:${mongodbOptions.port}`);
   await connection.connect();
   return {
     connection,
