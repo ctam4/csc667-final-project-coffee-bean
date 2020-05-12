@@ -1,19 +1,20 @@
 import { client as WebSocketClient } from 'websocket';
+
 const client = new WebSocketClient();
 
-let websocketUrl = 'ws://' + process.env.WEBSOCKET_HOST || window.location.hostname;
+let websocketUrl = `ws://${process.env.WEBSOCKET_HOST}` || window.location.hostname;
 let port;
 switch (window.location.protocol) {
   case 'http:':
     port = process.env.WEBSOCKET_HTTP_PORT || window.location.port;
     if (port !== 80) {
-      websocketUrl += ':' + port;
+      websocketUrl += `:${port}`;
     }
     break;
   case 'https:':
     port = process.env.WEBSOCKET_HTTPS_PORT || window.location.port;
     if (port !== 443) {
-      websocketUrl += ':' + port;
+      websocketUrl += `:${port}`;
     }
     break;
 }
