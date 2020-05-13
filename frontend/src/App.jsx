@@ -8,7 +8,6 @@ const App = () => (
   <Router>
     <Navbar />
     <Routes />
-    <p>Hello world!</p>
   </Router>
 );
 
