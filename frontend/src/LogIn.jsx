@@ -4,12 +4,12 @@ import { useCookies } from 'react-cookie';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Avatar, Button, TextField, Link, Grid, Typography, Container,
+  Avatar, Button, TextField, Link, Grid, Typography, Container, Paper,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Redirect } from 'react-router-dom';
 
-import { setIsLoggedIn } from 'actions/index.js';
+import { setIsLoggedIn } from './actions/index';
 import apiUrl from '../api';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: theme.spacing(3),
   },
   avatar: {
     margin: theme.spacing(1),
@@ -43,8 +44,8 @@ const LogIn = () => {
 
   const handleSubmission = async (e) => {
     e.preventDefault();
-    if (email !== '' && password !== '') {
-      await fetch(`${apiUrl}/auth/authenticate`, {
+    if (email.length > 0 && password.length > 0) {
+      await fetch(`${apiUrl}auth/login`, {
         method: 'post',
         headers: {
           Accept: 'application/json',
@@ -58,16 +59,23 @@ const LogIn = () => {
       })
         .then((res) => {
           if (!res.ok) {
-            throw new Error(`${res.status}: ${res.status}`);
+            if (res.status !== 406) {
+              throw new Error(`${res.status}: ${res.status}`);
+            }
+            return null;
           }
           return res.json();
         })
         .then((data) => {
-          setCookie('token', data.params.token);
-          dispatch(setIsLoggedIn(true));
-          setRedirect('/');
+          if (data === null) {
+            alert('Incorrect username / password.');
+          } else {
+            setCookie('token', data.params.token);
+            dispatch(setIsLoggedIn(true));
+            setRedirect('/');
+          }
         })
-        .catch(alert);
+        .catch(console.log);
     }
   };
 
@@ -75,34 +83,32 @@ const LogIn = () => {
     return <Redirect to={redirect} />;
   }
   return (
-    <Container component="main" maxWidth="sm">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Log-in
-        </Typography>
-        <form className={classes.form} onSubmit={(e) => handleSubmission(e)}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField variant="outlined" required fullWidth name="email" label="Email Address" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+    <React.Fragment>
+      <Container component="main" maxWidth="sm">
+        <Paper className={classes.paper} elevation={0}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">Log-in</Typography>
+          <form className={classes.form} onSubmit={(e) => handleSubmission(e)}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField variant="outlined" required fullWidth name="email" label="Email Address" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField variant="outlined" required fullWidth name="password" label="Password" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              </Grid>
+              <Grid item xs={12}>
+                <Button type="submit" fullWidth variant="contained" color="primary">Log In</Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Link to="/signup" variant="body2">Don&apos;t have an account? Sign up now</Link>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField variant="outlined" required fullWidth name="password" label="Password" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" fullWidth variant="contained" color="primary">Log In</Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Link to="/signup" href="/signup" variant="body2">
-                Don't have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+          </form>
+        </Paper>
+      </Container>
+    </React.Fragment>
   );
 };
 
