@@ -18,6 +18,7 @@ app.use(compression());
 app.use(cors());
 
 app.use('/', require('./routes/root.js'));
+app.use('/auth', require('./routes/auth.js'));
 
 http.createServer(app).listen(httpPort);
 https.createServer(httpsOptions, app).listen(httpsPort);
