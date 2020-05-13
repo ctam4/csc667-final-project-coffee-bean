@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { emphasize, withStyles } from '@material-ui/core/styles';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Chip from '@material-ui/core/Chip';
@@ -28,9 +29,9 @@ export default function CustomizedBreadcrumbs() {
     <Breadcrumbs aria-label="breadcrumb">
       <StyledBreadcrumb
         color="primary"
-        component="a"
-        href="#"
-        label="Join Now"
+        component={Link}
+        to="/signup"
+        label="Sign Up"
         onClick={handleClick}
       />
     </Breadcrumbs>

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import App from '../src/App';
 import reducers from '../src/reducers';
 
@@ -18,6 +19,7 @@ const store = createStore(
 ReactDOM.hydrate(
   <React.StrictMode>
     <Provider store={store}>
+      <CssBaseline />
       <App />
     </Provider>
   </React.StrictMode>,

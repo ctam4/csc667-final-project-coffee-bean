@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Chip from '@material-ui/core/Chip';
@@ -21,9 +22,9 @@ export default function CustomizedBreadcrumbs() {
       <StyledBreadcrumb
         variant="outlined"
         fontSize="large"
-        component="a"
-        href="#"
-        label=" Sign In"
+        component={Link}
+        to="/login"
+        label="Log In"
         onClick={handleClick}
       />
     </Breadcrumbs>

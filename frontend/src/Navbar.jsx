@@ -105,10 +105,10 @@ export default function PrimarySearchAppBar() {
             <Button
               style={{ fontSize: '26px' }}
               variant="h4"
-              to="/Menu"
+              to="/menu"
               component={Link}
             >
-              Menu
+              MENU
             </Button>
           </Typography>
           <Typography className={classes.title} variant="h6" noWrap>
