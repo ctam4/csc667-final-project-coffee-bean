@@ -12,10 +12,6 @@ const StyledBreadcrumb = withStyles((theme) => ({
   },
 }))(Chip); // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
 
-function handleClick(e) {
-  e.preventDefault();
-}
-
 export default function CustomizedBreadcrumbs() {
   return (
     <Breadcrumbs aria-label="breadcrumb">
@@ -25,7 +21,6 @@ export default function CustomizedBreadcrumbs() {
         component={Link}
         to="/login"
         label="Log In"
-        onClick={handleClick}
       />
     </Breadcrumbs>
   );
