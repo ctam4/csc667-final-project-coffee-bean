@@ -7,18 +7,25 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
-import Avatar from './components/navbar/Avatar';
+import Avatar from '@material-ui/core/Avatar';
 import Button1 from './components/navbar/Button1';
 import Button2 from './components/navbar/Button2';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
 import { Grid } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-    minHeight: 128,
+  },
+  purple: {
+    fontSize: 40,
+    width: 'auto',
+    height: 'auto',
+    color: theme.palette.getContrastText(green[100]),
+    backgroundColor: green[300],
   },
   menuButton: {
     color: 'black',
@@ -95,7 +102,7 @@ export default function newNavBar(props) {
               to="/"
               component={Link}
             >
-              <Avatar />
+              <Avatar className={classes.purple}>CB</Avatar>
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
               <Button
