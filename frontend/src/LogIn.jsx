@@ -45,6 +45,9 @@ const LogIn = () => {
   const handleSubmission = async (e) => {
     e.preventDefault();
     if (email.length > 0 && password.length > 0) {
+      const token = Buffer.from(
+        `${email.toLowerCase()}:${password}`,
+      ).toString('base64');
       await fetch(`${apiUrl}auth/login`, {
         method: 'post',
         headers: {
@@ -52,25 +55,18 @@ const LogIn = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          token: Buffer.from(
-            `${email.toLowerCase()}:${password}`,
-          ).toString('base64'),
+          token,
         }),
       })
         .then((res) => {
           if (!res.ok) {
             if (res.status !== 406) {
               throw new Error(`${res.status}: ${res.status}`);
+            } else {
+              alert('Incorrect username / password.');
             }
-            return null;
-          }
-          return res.json();
-        })
-        .then((data) => {
-          if (data === null) {
-            alert('Incorrect username / password.');
           } else {
-            setCookie('token', data.params.token);
+            setCookie('token', token);
             dispatch(setIsLoggedIn(true));
             setRedirect('/');
           }
