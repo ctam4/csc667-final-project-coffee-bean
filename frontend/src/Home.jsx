@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: ' 100%',
+    marginTop: theme.spacing(7),
   },
   divider: {
     backgroundColor: 'blue',

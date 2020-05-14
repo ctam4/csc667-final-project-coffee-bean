@@ -43,18 +43,6 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     top: 0,
   },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
   toolbar: {
     borderBottom: `3px solid ${theme.palette.divider}`,
     backgroundColor: 'white',
@@ -92,7 +80,9 @@ export default function newNavBar(props) {
   return (
     <React.Fragment>
       <ElevationScroll {...props}>
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar 
+        display="flex" flexDirection="row-reverse" p={1} m={1}
+        position="fixed" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
             <IconButton
               edge="start"
@@ -104,8 +94,9 @@ export default function newNavBar(props) {
             >
               <Avatar className={classes.purple}>CB</Avatar>
             </IconButton>
-            <Typography className={classes.title} variant="h6" noWrap>
+            <Typography  variant="h6" noWrap>
               <Button
+              display="flex"  p={1} m={1}
                 style={{ fontSize: '26px', fontWeight: 'bold' }}
                 variant="h4"
                 to="/Menu"
@@ -122,7 +113,7 @@ export default function newNavBar(props) {
             </Typography>
 
             <Grid className={classes.grow} />
-            <Grid className={classes.sectionDesktop}>
+            <Grid display="flex" flexDirection="row-reverse" p={1} m={1}>
               <IconButton aria-label="show 4 new mails" color="inherit">
                 <Badge color="secondary">
                   <Button1 />

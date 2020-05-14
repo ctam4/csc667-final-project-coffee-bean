@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: 'auto',
-    minHeight: 650,
+    minHeight: 700,
   },
   divider: {
     backgroundColor: 'blue',
