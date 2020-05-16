@@ -2,24 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Avatar from '@material-ui/core/Avatar';
-import Button1 from './components/navbar/Button1';
-import Button2 from './components/navbar/Button2';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
-import { Grid } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
   purple: {
     fontSize: 40,
     width: 'auto',
@@ -32,16 +24,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    fontWeight: 'bold',
-    color: 'black',
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-      marginLeft: theme.spacing(3),
-    },
+    flexGrow: 1,
   },
   appBar: {
     top: 0,
+    flexGrow: 1,
   },
   toolbar: {
     borderBottom: `3px solid ${theme.palette.divider}`,
@@ -80,9 +67,10 @@ export default function newNavBar(props) {
   return (
     <React.Fragment>
       <ElevationScroll {...props}>
-        <AppBar 
-        display="flex" flexDirection="row-reverse" p={1} m={1}
-        position="fixed" className={classes.appBar}>
+        <AppBar
+          position="fixed"
+          className={classes.appBar}
+        >
           <Toolbar className={classes.toolbar}>
             <IconButton
               edge="start"
@@ -94,40 +82,25 @@ export default function newNavBar(props) {
             >
               <Avatar className={classes.purple}>CB</Avatar>
             </IconButton>
-            <Typography  variant="h6" noWrap>
+            <div className={classes.title}>
               <Button
-              display="flex"  p={1} m={1}
-                style={{ fontSize: '26px', fontWeight: 'bold' }}
-                variant="h4"
-                to="/Menu"
+                color="default"
+                size="large"
                 component={Link}
+                to="/menu"
               >
-                MENU
+                Menu
               </Button>
-            </Typography>
-            <Typography className={classes.title} variant="h6" noWrap>
-
-            </Typography>
-            <Typography className={classes.title} variant="h6" noWrap>
-
-            </Typography>
-
-            <Grid className={classes.grow} />
-            <Grid display="flex" flexDirection="row-reverse" p={1} m={1}>
-              <IconButton aria-label="show 4 new mails" color="inherit">
-                <Badge color="secondary">
-                  <Button1 />
-                </Badge>
-              </IconButton>
-              <IconButton
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
-                <Badge color="secondary">
-                  <Button2 />
-                </Badge>
-              </IconButton>
-            </Grid>
+            </div>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              component={Link}
+              to="/login"
+            >
+              Log In
+            </Button>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
