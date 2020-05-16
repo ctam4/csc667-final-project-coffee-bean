@@ -3,19 +3,16 @@ import { useCookies } from 'react-cookie';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Avatar, Button, TextField, Link, Grid, Typography, Container, Paper,
+  Avatar, Button, TextField, Grid, Typography, Container, Paper,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import apiUrl from '../api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    display: 'flex',
-    alignItems: 'center',
     marginTop: theme.spacing(5),
-    flexDirection: 'column',
     padding: theme.spacing(3),
   },
   avatar: {
@@ -23,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '80%',
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -74,7 +71,12 @@ const SignUp = () => {
           </Avatar>
           <Typography component="h1" variant="h5">Sign-up</Typography>
           <form className={classes.form} onSubmit={(e) => handleSubmission(e)}>
-            <Grid container spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+              justify="center"
+            >
               <Grid item xs={12}>
                 <TextField variant="outlined" required fullWidth name="email" label="Email Address" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
               </Grid>

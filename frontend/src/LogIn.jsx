@@ -4,20 +4,17 @@ import { useCookies } from 'react-cookie';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Avatar, Button, TextField, Link, Grid, Typography, Container, Paper,
+  Avatar, Button, TextField, Grid, Typography, Container, Paper,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { setIsLoggedIn } from './actions/index';
 import apiUrl from '../api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(6),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginTop: theme.spacing(5),
     padding: theme.spacing(3),
   },
   avatar: {
@@ -87,7 +84,12 @@ const LogIn = () => {
           </Avatar>
           <Typography component="h1" variant="h5">Log-in</Typography>
           <form className={classes.form} onSubmit={(e) => handleSubmission(e)}>
-            <Grid container spacing={2}>
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+              justify="center"
+            >
               <Grid item xs={12}>
                 <TextField variant="outlined" required fullWidth name="email" label="Email Address" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
               </Grid>
