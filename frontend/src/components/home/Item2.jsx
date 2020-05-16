@@ -17,11 +17,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FooterButton2 from './FooterButton2';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: 'auto',
-    minHeight: 650,
-  },
   divider: {
     backgroundColor: 'blue',
     maxWidth: 330,
@@ -60,84 +55,82 @@ export default function Item1() {
   };
 
   return (
-    <div>
-      <Card className={classes.root}>
-        <CardHeader
-          avatar={(
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              CB
+    <Card>
+      <CardHeader
+        avatar={(
+          <Avatar aria-label="recipe" className={classes.avatar}>
+            CB
             </Avatar>
-          )}
-          action={(
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          )}
-          title="Caramel Frappuccino"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          image="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-60241.jpg"
-          title="Paella dish"
-        />
+        )}
+        action={(
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        )}
+        title="Caramel Frappuccino"
+        subheader="September 14, 2016"
+      />
+      <CardMedia
+        className={classes.media}
+        image="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-60241.jpg"
+        title="Paella dish"
+      />
+      <CardContent>
+        <Typography align="center" color="default" variant="h6" component="p">
+          Brew and enjoy from the comfort of
+          </Typography>
+        <Typography align="center" color="default" variant="h6" component="p">
+          home
+          </Typography>
+        <Typography
+          className={classes.Typography}
+          align="center"
+          // color="textSecondary"
+          color="default"
+          variant="h8"
+          component="p"
+        >
+          Get your Coffee-Bean favorites from your grocery
+          </Typography>
+        <Typography
+          className={classes.Typography}
+          align="center"
+          color="default"
+          variant="h8"
+          component="p"
+        >
+          provider.
+          </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <FooterButton2 />
+        </IconButton>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography align="center" color="default" variant="h6" component="p">
-            Brew and enjoy from the comfort of
-          </Typography>
-          <Typography align="center" color="default" variant="h6" component="p">
-            home
-          </Typography>
-          <Typography
-            className={classes.Typography}
-            align="center"
-            // color="textSecondary"
-            color="default"
-            variant="h8"
-            component="p"
-          >
-            Get your Coffee-Bean favorites from your grocery
-          </Typography>
-          <Typography
-            className={classes.Typography}
-            align="center"
-            color="default"
-            variant="h8"
-            component="p"
-          >
-            provider.
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="share">
-            <FooterButton2 />
-          </IconButton>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Caramel syrup meets coffee, milk and ice for a rendezvous in the
-              blender, while whipped cream and buttery caramel sauce layer the
-              love on top. To change things up, try it affogato-style with a hot
-              espresso shot poured right over the top.
+          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>
+            Caramel syrup meets coffee, milk and ice for a rendezvous in the
+            blender, while whipped cream and buttery caramel sauce layer the
+            love on top. To change things up, try it affogato-style with a hot
+            espresso shot poured right over the top.
             </Typography>
-          </CardContent>
-        </Collapse>
-      </Card>
-    </div>
+        </CardContent>
+      </Collapse>
+    </Card>
   );
 }

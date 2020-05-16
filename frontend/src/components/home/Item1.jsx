@@ -17,11 +17,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FooterButton from './FooterButton';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: 'auto',
-    minHeight: 700,
-  },
   divider: {
     backgroundColor: 'blue',
     maxWidth: 330,
@@ -49,9 +44,6 @@ const useStyles = makeStyles((theme) => ({
   Typography: {
     marginTop: theme.spacing(2),
   },
-  lowerButton: {
-    marginTop: theme.spacing(5),
-  },
 }));
 
 export default function Item1() {
@@ -63,77 +55,75 @@ export default function Item1() {
   };
 
   return (
-    <div>
-      <Card className={classes.root}>
-        <CardHeader
-          avatar={(
-            <Avatar aria-label="recipe" className={classes.avatar}>
-              CB
+    <Card>
+      <CardHeader
+        avatar={(
+          <Avatar aria-label="recipe" className={classes.avatar}>
+            CB
             </Avatar>
-          )}
-          action={(
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          )}
-          title="Caramel Frappuccino"
-          subheader="September 14, 2016"
-        />
-        <CardMedia
-          className={classes.media}
-          image="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-60240.jpg"
-          title="Paella dish"
-        />
-        <CardContent>
-          <Typography
-            align="center"
-            // color="textSecondary"
-            color="black"
-            variant="h6"
-            component="p"
-          >
-            $0 delivery fee for Coffee-Bean orders on uber eats
+        )}
+        action={(
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        )}
+        title="Caramel Frappuccino"
+        subheader="September 14, 2016"
+      />
+      <CardMedia
+        className={classes.media}
+        image="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-60240.jpg"
+        title="Paella dish"
+      />
+      <CardContent>
+        <Typography
+          align="center"
+          // color="textSecondary"
+          color="black"
+          variant="h6"
+          component="p"
+        >
+          $0 delivery fee for Coffee-Bean orders on uber eats
           </Typography>
 
-          <Typography
-            className={classes.Typography}
-            color="black"
-            variant="h8"
-            component="p"
-          >
-            Get your favorite food and drinks delivered.*
+        <Typography
+          className={classes.Typography}
+          color="black"
+          variant="h8"
+          component="p"
+        >
+          Get your favorite food and drinks delivered.*
           </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton className={classes.lowerButton} aria-label="share">
-            <FooterButton />
-          </IconButton>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Caramel syrup meets coffee, milk and ice for a rendezvous in the
-              blender, while whipped cream and buttery caramel sauce layer the
-              love on top. To change things up, try it affogato-style with a hot
-              espresso shot poured right over the top.
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton aria-label="add to favorites">
+          <FavoriteIcon />
+        </IconButton>
+        <IconButton aria-label="share">
+          <FooterButton />
+        </IconButton>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded,
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>
+            Caramel syrup meets coffee, milk and ice for a rendezvous in the
+            blender, while whipped cream and buttery caramel sauce layer the
+            love on top. To change things up, try it affogato-style with a hot
+            espresso shot poured right over the top.
             </Typography>
-          </CardContent>
-        </Collapse>
-      </Card>
-    </div>
+        </CardContent>
+      </Collapse>
+    </Card>
   );
 }
