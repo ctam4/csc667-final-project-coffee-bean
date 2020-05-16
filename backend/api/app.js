@@ -21,6 +21,7 @@ app.use('/', require('./routes/root.js'));
 app.use('/auth', require('./routes/auth.js'));
 app.use('/product', require('./routes/product.js'));
 app.use('/order', require('./routes/order.js'));
+app.use('/inventory', require('./routes/inventory.js'));
 
 http.createServer(app).listen(httpPort);
 https.createServer(httpsOptions, app).listen(httpsPort);
