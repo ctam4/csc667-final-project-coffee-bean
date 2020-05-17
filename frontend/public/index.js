@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
+import { CookiesProvider } from 'react-cookie';
 import reduxThunk from 'redux-thunk';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import App from '../src/App';
@@ -19,8 +20,10 @@ const store = createStore(
 ReactDOM.hydrate(
   <React.StrictMode>
     <Provider store={store}>
-      <CssBaseline />
-      <App />
+      <CookiesProvider>
+        <CssBaseline />
+        <App />
+      </CookiesProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('react-root'),
