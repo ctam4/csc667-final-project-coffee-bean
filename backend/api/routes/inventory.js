@@ -36,11 +36,11 @@ router.post('/', async (req, res) => {
       // check existing inventory
       await mongodb
         .then(async ({ connection, db }) => {
-          const products = await db
-            .collection('products')
+          const inventory = await db
+            .collection('inventory')
             .find({ productId })
             .toArray();
-          if (products.length === 0) {
+          if (inventory.length === 0) {
             await db
               .collection('inventory')
               .insert({
