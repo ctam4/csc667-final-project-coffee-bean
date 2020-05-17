@@ -19,6 +19,7 @@
     "notistack": "^0.9.13",
     "parcel-bundler": "^1.12.4",
     "prop-types": "^15.7.2",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
