@@ -16,7 +16,7 @@ export default function RecipeReviewCard() {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <Container component="main" maxWidth="lg">
         <Paper className={classes.paper} elevation={0}>
           <Grid
@@ -34,6 +34,6 @@ export default function RecipeReviewCard() {
           </Grid>
         </Paper>
       </Container>
-    </React.Fragment>
+    </>
   );
 }

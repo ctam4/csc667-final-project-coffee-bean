@@ -60,7 +60,7 @@ export default function Item1() {
         avatar={(
           <Avatar aria-label="recipe" className={classes.avatar}>
             CB
-            </Avatar>
+          </Avatar>
         )}
         action={(
           <IconButton aria-label="settings">
@@ -78,10 +78,10 @@ export default function Item1() {
       <CardContent>
         <Typography align="center" color="default" variant="h6" component="p">
           Brew and enjoy from the comfort of
-          </Typography>
+        </Typography>
         <Typography align="center" color="default" variant="h6" component="p">
           home
-          </Typography>
+        </Typography>
         <Typography
           className={classes.Typography}
           align="center"
@@ -91,7 +91,7 @@ export default function Item1() {
           component="p"
         >
           Get your Coffee-Bean favorites from your grocery
-          </Typography>
+        </Typography>
         <Typography
           className={classes.Typography}
           align="center"
@@ -100,7 +100,7 @@ export default function Item1() {
           component="p"
         >
           provider.
-          </Typography>
+        </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -128,7 +128,7 @@ export default function Item1() {
             blender, while whipped cream and buttery caramel sauce layer the
             love on top. To change things up, try it affogato-style with a hot
             espresso shot poured right over the top.
-            </Typography>
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>

@@ -63,7 +63,7 @@ const SignUp = () => {
     return <Redirect to={redirect} />;
   }
   return (
-    <React.Fragment>
+    <>
       <Container component="main" maxWidth="sm">
         <Paper className={classes.paper} elevation={0}>
           <Avatar className={classes.avatar}>
@@ -93,7 +93,7 @@ const SignUp = () => {
           </form>
         </Paper>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 

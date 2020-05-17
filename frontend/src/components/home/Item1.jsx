@@ -60,7 +60,7 @@ export default function Item1() {
         avatar={(
           <Avatar aria-label="recipe" className={classes.avatar}>
             CB
-            </Avatar>
+          </Avatar>
         )}
         action={(
           <IconButton aria-label="settings">
@@ -84,7 +84,7 @@ export default function Item1() {
           component="p"
         >
           $0 delivery fee for Coffee-Bean orders on uber eats
-          </Typography>
+        </Typography>
 
         <Typography
           className={classes.Typography}
@@ -93,7 +93,7 @@ export default function Item1() {
           component="p"
         >
           Get your favorite food and drinks delivered.*
-          </Typography>
+        </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -121,7 +121,7 @@ export default function Item1() {
             blender, while whipped cream and buttery caramel sauce layer the
             love on top. To change things up, try it affogato-style with a hot
             espresso shot poured right over the top.
-            </Typography>
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>
