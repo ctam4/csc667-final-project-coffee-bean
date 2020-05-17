@@ -34,7 +34,7 @@ const LogIn = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const [cookies, setCookie] = useCookies(['token']);
+  const [cookies, setCookie] = useCookies(['isLoggedIn']);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState('');
@@ -63,7 +63,7 @@ const LogIn = () => {
               alert('Incorrect username / password.');
             }
           } else {
-            setCookie('token', token);
+            setCookie('isLoggedIn', true);
             dispatch(setIsLoggedIn(true));
             setRedirect('/');
           }
