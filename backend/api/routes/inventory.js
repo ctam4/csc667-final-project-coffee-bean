@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
               .collection('inventory')
               .findOneAndUpdate(
                 { productId },
-                { $set: { quantity: products[0].quantity + quantity } },
+                { $set: { quantity: inventory[0].quantity + quantity } },
                 { upsert: true },
               );
           }
