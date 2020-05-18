@@ -47,7 +47,8 @@ router.post('/', async (req, res) => {
                 quantity,
                 productId,
               });
-          } else {
+            res.sendStatus(200).end();
+          } else if (inventory[0].quantity + quantity > 0) {
             await db
               .collection('inventory')
               .findOneAndUpdate(
@@ -55,8 +56,15 @@ router.post('/', async (req, res) => {
                 { $set: { quantity: inventory[0].quantity + quantity } },
                 { upsert: true },
               );
+            res.sendStatus(200).end();
+          } else if (inventory[0].quantity + quantity === 0) {
+            await db
+              .collection('inventory')
+              .findOneAndDelete({ productId });
+            res.sendStatus(200).end();
+          } else {
+            res.sendStatus(400).end();
           }
-          res.sendStatus(200).end();
         })
         .catch(() => res.sendStatus(500).end());
     } else {
