@@ -67,8 +67,8 @@ export default function Item1() {
             <MoreVertIcon />
           </IconButton>
         )}
-        title="Caramel Frappuccino"
-        subheader="September 14, 2016"
+        title="Coffee Bean"
+        subheader="May 22, 2020"
       />
       <CardMedia
         className={classes.media}
@@ -83,9 +83,8 @@ export default function Item1() {
           variant="h6"
           component="p"
         >
-          $0 delivery fee for Coffee-Bean orders on uber eats
-          </Typography>
-
+          $0 Delivery Fee for All Orders
+        </Typography>
         <Typography
           className={classes.Typography}
           color="black"
@@ -93,7 +92,7 @@ export default function Item1() {
           component="p"
         >
           Get your favorite food and drinks delivered.*
-          </Typography>
+        </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -115,13 +114,13 @@ export default function Item1() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
+          <Typography variant="h6" gutterBottom>Method</Typography>
+          <Typography variant="body1">
             Caramel syrup meets coffee, milk and ice for a rendezvous in the
             blender, while whipped cream and buttery caramel sauce layer the
             love on top. To change things up, try it affogato-style with a hot
             espresso shot poured right over the top.
-            </Typography>
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>
