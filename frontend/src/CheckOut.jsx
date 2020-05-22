@@ -1,18 +1,17 @@
-import React from 'react';
-// import './components/checkout/styles.css';
-
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid, Container, Paper,
 } from '@material-ui/core';
-import { connect } from 'react-redux';
-import { addItem, removeItem } from './actions';
 
 import CheckOutItem from './components/checkout/CheckOutItem';
 import ReviewOrder from './components/checkout/ReviewOrder';
 import EmptyCheckOut from './components/checkout/EmptyCheckOut';
+
+import apiUrl from '../api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,56 +21,72 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CheckOut = ({
-  items, totalPrice, removeItem, addItem,
-}) => {
+const CheckOut = () => {
   const classes = useStyles();
-  const isEmpty = () => items.length <= 0;
+  const initialItems = useSelector((state) => state.cart.items);
+  const [items, setItems] = useState([]);
 
-  const renderCheckOutList = (items) => (
-    <Grid
-      container
-      spacing={3}
-      direction="row"
-      justify="center"
-    >
-      {items.map((item, idx) => (
-        <Grid item xs={12}>
-          <CheckOutItem
-            key={idx}
-            name={item.name}
-            price={item.price}
-            img={item.img}
-            index={idx}
-            add={addItem}
-            remove={removeItem}
-          />
-        </Grid>
-      ))}
-    </Grid>
-  );
+  const load = async () => {
+    try {
+      const response = await Axios.get(`${apiUrl}product`);
+      if (response.status === 200) {
+        setItems(initialItems.map((item) => {
+          let newItem;
+          const product = response.data.find((item2) => item.productId === item2._id);
+          newItem.name = product.name;
+          newItem.image = product.image;
+          return newItem;
+        }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (initialItems.length > 0) {
+      load();
+    }
+  }, [initialItems]);
 
   return (
     <>
       <Container component="main" maxWidth="lg">
         <Paper className={classes.paper} elevation={0}>
-          {items.length === 0 && (
-          <EmptyCheckOut />
-          )}
-          {items.length !== 0 && (
-          <Grid
-            container
-            spacing={2}
-            direction="row"
-            justify="center"
-          >
-            <Grid item xs={8}>
-              {renderCheckOutList(items)}
+          {items.length === 0 ? (
+            <EmptyCheckOut />
+          ) : (
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+              justify="center"
+            >
+              <Grid item xs={8}>
+                <Grid
+                  container
+                  spacing={3}
+                  direction="row"
+                  justify="center"
+                >
+                  {items.map((item) => (
+                    <Grid item xs={12}>
+                      <CheckOutItem
+                        key={item.productId}
+                        productId={item.productId}
+                        price={item.price}
+                        quantity={item.quantity}
+                        name={item.name}
+                        image={item.image}
+                      />
+                    </Grid>
+                  ))}
+                </Grid>
+              </Grid>
+              <Grid item xs={4}>
+                <ReviewOrder />
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <ReviewOrder price={totalPrice} numOfItems={items.length} />
-            </Grid>
-          </Grid>
           )}
         </Paper>
       </Container>
@@ -79,33 +94,4 @@ const CheckOut = ({
   );
 };
 
-CheckOut.defaultProps = {
-  items: [],
-  totalPrice: 0,
-  addItem: () => {},
-  removeItem: () => {},
-};
-
-CheckOut.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
-  totalPrice: PropTypes.number,
-  addItem: PropTypes.func,
-  removeItem: PropTypes.func,
-
-};
-
-const mapStateToProps = (state) => ({
-  totalPrice: (() => {
-    let total = 0;
-    state.cart.items.forEach((item) => (total += item.price));
-    return total;
-  })(),
-  items: state.cart.items,
-});
-
-const mapDispatchToProps = {
-  addItem,
-  removeItem,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CheckOut);
+export default CheckOut;

@@ -1,14 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import {
+  IconButton, Card, CardContent, CardMedia, Typography,
+} from '@material-ui/core';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+
+import { removeItem } from '../../actions/index';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -25,46 +25,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function ccyFormat(num) {
+  return `$${num.toFixed(2)}`;
+}
+
 const CheckOutItem = ({
-  name, price, img, index, add, remove,
+  productId, price, quantity, name, image,
 }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const addItem = () => {
-    add({
-      name,
-      price,
-      img,
-    });
-  };
-
-  const removeItem = () => {
-    remove(index);
+  const removeFromCart = () => {
+    dispatch(removeItem(productId));
   };
 
   return (
     <>
       <Card>
         <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {name}
-          </Typography>
+          <Typography component="h5" variant="h5">{name}</Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            $
-            {price.toFixed(2)}
+            {quantity}
+            {' '}
+            &times;
+            {' '}
+            {ccyFormat(price)}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-          <IconButton aria-label="add" onClick={addItem}>
-            <AddCircleOutlineIcon />
-          </IconButton>
-          <IconButton aria-label="remove" onClick={removeItem}>
+          <IconButton aria-label="remove" onClick={removeFromCart}>
             <RemoveCircleOutlineIcon />
           </IconButton>
         </div>
         <CardMedia
           className={classes.cover}
-          image={img}
+          image={image}
           title={name}
         />
       </Card>
@@ -74,22 +69,19 @@ const CheckOutItem = ({
 
 // Add default image if we have one
 CheckOutItem.defaultProps = {
+  productId: '',
+  price: 0.00,
+  quantity: 0,
   name: '',
-  img: '',
-  price: 0,
-  index: -1,
-  add: () => {},
-  remove: () => {},
+  image: '',
 };
 
 CheckOutItem.propTypes = {
-  name: PropTypes.string,
-  img: PropTypes.string,
-  price: PropTypes.number,
-  index: PropTypes.number,
-  add: PropTypes.func,
-  remove: PropTypes.func,
+  productId: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
-
 
 export default CheckOutItem;
