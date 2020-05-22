@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useCookies } from 'react-cookie';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,7 +8,6 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Redirect, Link } from 'react-router-dom';
 
-import { setIsLoggedIn } from './actions/index';
 import apiUrl from '../api';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,8 +30,6 @@ const useStyles = makeStyles((theme) => ({
 
 const LogIn = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const [cookies, setCookie] = useCookies(['token']);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -64,7 +60,6 @@ const LogIn = () => {
             }
           } else {
             setCookie('token', token);
-            dispatch(setIsLoggedIn(true));
             setRedirect('/');
           }
         })

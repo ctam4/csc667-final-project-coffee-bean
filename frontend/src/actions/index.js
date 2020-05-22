@@ -4,7 +4,6 @@ import {
   CART_CLEAR,
   ORDER_FETCH_ORDERS,
   ORDER_FETCH_ORDER,
-  USER_SET_ISLOGGEDIN,
 } from './types';
 
 export const addItem = (item) => ({
@@ -28,8 +27,3 @@ export const fetchOrders = () => {
 export const fetchOrder = (id) => {
   // console.log(`FETCHING ORDER WITH ID: ${id}`);
 };
-
-export const setIsLoggedIn = (isLoggedIn) => ({
-  type: USER_SET_ISLOGGEDIN,
-  isLoggedIn,
-});
