@@ -72,6 +72,32 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:orderId', async (req, res) => {
+  const { orderId } = req.param;
+  const params = req.query;
+  if (Object.keys(params).length === 1) {
+    const { token } = params;
+    // TODO: redis
+    // decode base64 token to two items
+    const decoded = Buffer.from(token, 'base64').toString().split(':');
+    await mongodb
+      .then(async ({ connection, db }) => {
+        res.json(
+          await db
+            .collection('orders')
+            .find({
+              email: decoded[0],
+              _id: orderId,
+            })
+            .toArray(),
+        ).end();
+      })
+      .catch(() => res.sendStatus(500).end());
+  } else {
+    res.sendStatus(400).end();
+  }
+});
+
 router.post('/', async (req, res) => {
   const params = req.body;
   // validate params

@@ -4,17 +4,16 @@ import {
   CART_CLEAR,
   ORDER_FETCH_ORDERS,
   ORDER_FETCH_ORDER,
-  USER_SET_ISLOGGEDIN,
 } from './types';
 
 export const addItem = (item) => ({
   type: CART_ADD_ITEM,
-  payload: item,
+  item,
 });
 
-export const removeItem = (itemId) => ({
+export const removeItem = (productId) => ({
   type: CART_REMOVE_ITEM,
-  payload: itemId,
+  productId,
 });
 
 export const clearCart = () => ({
@@ -28,8 +27,3 @@ export const fetchOrders = () => {
 export const fetchOrder = (id) => {
   // console.log(`FETCHING ORDER WITH ID: ${id}`);
 };
-
-export const setIsLoggedIn = (isLoggedIn) => ({
-  type: USER_SET_ISLOGGEDIN,
-  isLoggedIn,
-});

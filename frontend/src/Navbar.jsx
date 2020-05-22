@@ -65,7 +65,7 @@ export default function newNavBar(props) {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <ElevationScroll {...props}>
         <AppBar
           position="fixed"
@@ -91,6 +91,22 @@ export default function newNavBar(props) {
               >
                 Menu
               </Button>
+              <Button
+                color="default"
+                size="large"
+                component={Link}
+                to="/order-history"
+              >
+                Order History
+              </Button>
+              <Button
+                color="default"
+                size="large"
+                component={Link}
+                to="/inventory"
+              >
+                Inventory
+              </Button>
             </div>
             <Button
               variant="outlined"
@@ -106,6 +122,6 @@ export default function newNavBar(props) {
       </ElevationScroll>
       <Divider />
       <Toolbar />
-    </React.Fragment>
+    </>
   );
 }

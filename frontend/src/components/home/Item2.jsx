@@ -60,15 +60,15 @@ export default function Item1() {
         avatar={(
           <Avatar aria-label="recipe" className={classes.avatar}>
             CB
-            </Avatar>
+          </Avatar>
         )}
         action={(
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         )}
-        title="Caramel Frappuccino"
-        subheader="September 14, 2016"
+        title="Coffee Bean"
+        subheader="May 22, 2020"
       />
       <CardMedia
         className={classes.media}
@@ -77,11 +77,8 @@ export default function Item1() {
       />
       <CardContent>
         <Typography align="center" color="default" variant="h6" component="p">
-          Brew and enjoy from the comfort of
-          </Typography>
-        <Typography align="center" color="default" variant="h6" component="p">
-          home
-          </Typography>
+          Brew and Enjoy from the Comfort of Home
+        </Typography>
         <Typography
           className={classes.Typography}
           align="center"
@@ -90,17 +87,8 @@ export default function Item1() {
           variant="h8"
           component="p"
         >
-          Get your Coffee-Bean favorites from your grocery
-          </Typography>
-        <Typography
-          className={classes.Typography}
-          align="center"
-          color="default"
-          variant="h8"
-          component="p"
-        >
-          provider.
-          </Typography>
+          Get your Coffee-Bean usual from any grocery stores.
+        </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -122,13 +110,13 @@ export default function Item1() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
+          <Typography variant="h6" gutterBottom>Method</Typography>
+          <Typography variant="body1">
             Caramel syrup meets coffee, milk and ice for a rendezvous in the
             blender, while whipped cream and buttery caramel sauce layer the
             love on top. To change things up, try it affogato-style with a hot
             espresso shot poured right over the top.
-            </Typography>
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>

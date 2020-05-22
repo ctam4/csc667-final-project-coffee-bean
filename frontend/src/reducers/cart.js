@@ -1,16 +1,8 @@
 import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_CLEAR } from '../actions/types';
 
 const INITIAL_STATE = {
-  price: 0,
-  items: [
-    { name: 'dads', price: 1.00, img: 'IMAGE_PLACEHOLDER' },
-    { name: 'a', price: 1.00, img: 'IMAGE_PLACEHOLDER' },
-    { name: 'FRAPPP', price: 4.00, img: 'IMAGE_PLACEHOLDER' },
-    { name: 'FRAPPP', price: 1.00, img: 'IMAGE_PLACEHOLDER' },
-    { name: 'FRAPPP', price: 1.00, img: 'IMAGE_PLACEHOLDER' },
-    { name: 'aaaaaaaaaaaaaaaaaaaaaaaaa', price: 1.00, img: 'IMAGE_PLACEHOLDER' },
-    { name: 'awdasdawdasdasd', price: 1.00, img: 'IMAGE_PLACEHOLDER' },
-  ],
+  totalPrice: 0.00,
+  items: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,21 +10,24 @@ export default (state = INITIAL_STATE, action) => {
     case CART_ADD_ITEM:
       return {
         ...state,
+        totalPrice: state.totalPrice + action.item.price * action.item.quantity,
         items: [
           ...state.items,
-          action.payload,
+          action.item,
         ],
       };
     case CART_REMOVE_ITEM:
+      const item = state.items.find((item) => item.productId == action.productId);
       return {
         ...state,
-        items: state.items.filter((item, idx) => idx !== action.payload),
+        totalPrice: state.totalPrice + item.price * item.quantity,
+        items: state.items.filter((item) => item.productId !== action.productId),
       };
     case CART_CLEAR:
       return {
         ...state,
-        price: 0,
-        items: [],
+        totalPrice: INITIAL_STATE.totalPrice,
+        items: INITIAL_STATE.items,
       };
     default:
       return state;

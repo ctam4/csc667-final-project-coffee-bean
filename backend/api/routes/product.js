@@ -25,6 +25,31 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:productId', async (req, res) => {
+  const { productId } = req.param;
+  const params = req.query;
+  if (Object.keys(params).length === 0) {
+    await mongodb
+      .then(async ({ connection, db }) => {
+        const product = await db
+          .collection('products')
+          .findOneAndUpdate(
+            { productId },
+            { $inc: { views: 1 } },
+            { returnNewDocument: true },
+          );
+        if (product.value !== null) {
+          res.json(product.value).end();
+        } else {
+          res.sendStatus(400).end();
+        }
+      })
+      .catch(() => res.sendStatus(500).end());
+  } else {
+    res.sendStatus(400).end();
+  }
+});
+
 // for dummy data
 router.post('/', async (req, res) => {
   const params = req.body;
@@ -42,6 +67,7 @@ router.post('/', async (req, res) => {
               name,
               price,
               image,
+              views: 0,
             });
           res.json({ _id: products.insertedIds }).end();
         })

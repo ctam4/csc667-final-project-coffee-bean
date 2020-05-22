@@ -35,9 +35,8 @@ router.post('/login', async (req, res) => {
 router.post('/signup', async (req, res) => {
   const params = req.body;
   // validate params
-  if (Object.keys(params).length === 2 && 'email' in params && 'password' in params) {
-    const { email } = params;
-    const { password } = params;
+  if (Object.keys(params).length === 3 && 'email' in params && 'password' in params && 'role' in params) {
+    const { email, password, role } = params;
     if (email.length > 0 && password.length > 0) {
       await mongodb
         .then(async ({ connection, db }) => {
@@ -46,7 +45,12 @@ router.post('/signup', async (req, res) => {
             .collection('tokens')
             .findOneAndUpdate(
               { email: email.toLowerCase() },
-              { $set: { token: Buffer.from(`${email.toLowerCase()}:${password}`).toString('base64') } },
+              {
+                $set: {
+                  token: Buffer.from(`${email.toLowerCase()}:${password}`).toString('base64'),
+                  role,
+                },
+              },
               { upsert: true },
             );
           res.sendStatus(200).end();
@@ -57,6 +61,36 @@ router.post('/signup', async (req, res) => {
     }
   } else {
     res.sendStatus(400).end();
+  }
+});
+
+router.get('/', async (req, res) => {
+  const params = req.query;
+  // validate params
+  if (Object.keys(params).length === 1 && 'token' in params) {
+    const { token } = params;
+    if (token.length > 0) {
+      // TODO: redis
+      await mongodb
+        .then(async ({ connection, db }) => {
+          res.json(
+            await db
+              .collection('tokens')
+              .findOne(
+                { token },
+                {
+                  _id: 0,
+                  email: 0,
+                  token: 0,
+                  role: 1,
+                }
+              ),
+          ).end();
+        })
+        .catch(() => res.sendStatus(500).end());
+    } else {
+      res.sendStatus(400).end();
+    }
   }
 });
 
