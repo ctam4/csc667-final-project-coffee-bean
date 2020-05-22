@@ -67,8 +67,8 @@ export default function Item1() {
             <MoreVertIcon />
           </IconButton>
         )}
-        title="Caramel Frappuccino"
-        subheader="September 14, 2016"
+        title="Coffee Bean"
+        subheader="May 22, 2020"
       />
       <CardMedia
         className={classes.media}
@@ -77,10 +77,7 @@ export default function Item1() {
       />
       <CardContent>
         <Typography align="center" color="default" variant="h6" component="p">
-          Brew and enjoy from the comfort of
-        </Typography>
-        <Typography align="center" color="default" variant="h6" component="p">
-          home
+          Brew and Enjoy from the Comfort of Home
         </Typography>
         <Typography
           className={classes.Typography}
@@ -90,16 +87,7 @@ export default function Item1() {
           variant="h8"
           component="p"
         >
-          Get your Coffee-Bean favorites from your grocery
-        </Typography>
-        <Typography
-          className={classes.Typography}
-          align="center"
-          color="default"
-          variant="h8"
-          component="p"
-        >
-          provider.
+          Get your Coffee-Bean usual from any grocery stores.
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -122,8 +110,8 @@ export default function Item1() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
+          <Typography variant="h6" gutterBottom>Method</Typography>
+          <Typography variant="body1">
             Caramel syrup meets coffee, milk and ice for a rendezvous in the
             blender, while whipped cream and buttery caramel sauce layer the
             love on top. To change things up, try it affogato-style with a hot

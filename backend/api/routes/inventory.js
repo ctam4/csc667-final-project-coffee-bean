@@ -36,27 +36,35 @@ router.post('/', async (req, res) => {
       // check existing inventory
       await mongodb
         .then(async ({ connection, db }) => {
-          const products = await db
-            .collection('products')
+          const inventory = await db
+            .collection('inventory')
             .find({ productId })
             .toArray();
-          if (products.length === 0) {
+          if (inventory.length === 0) {
             await db
               .collection('inventory')
               .insert({
                 quantity,
                 productId,
               });
-          } else {
+            res.sendStatus(200).end();
+          } else if (inventory[0].quantity + quantity > 0) {
             await db
               .collection('inventory')
               .findOneAndUpdate(
                 { productId },
-                { $set: { quantity: products[0].quantity + quantity } },
+                { $set: { quantity: inventory[0].quantity + quantity } },
                 { upsert: true },
               );
+            res.sendStatus(200).end();
+          } else if (inventory[0].quantity + quantity === 0) {
+            await db
+              .collection('inventory')
+              .findOneAndDelete({ productId });
+            res.sendStatus(200).end();
+          } else {
+            res.sendStatus(400).end();
           }
-          res.sendStatus(200).end();
         })
         .catch(() => res.sendStatus(500).end());
     } else {
