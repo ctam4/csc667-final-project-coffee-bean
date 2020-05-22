@@ -1,6 +1,8 @@
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
+const websocketServer = require('websocket').server;
+const { incrementView, decrementView, getViews } = require('./views');
 
 const httpPort = 5080;
 const httpsPort = 5443;
@@ -14,32 +16,55 @@ const websocketOptions = {
   httpServer: [httpServer, httpsServer],
   autoAcceptConnections: false,
 };
-const websocketServer = require('websocket').server;
 
 const app = new websocketServer(websocketOptions);
+
+const broadcastMessage = (message) => {
+  app.connections.forEach((client) => {
+    client.send(JSON.stringify(message));
+  });
+};
+
+const update = (pid) => {
+  broadcastMessage({
+    type: 'UPDATED_VIEW',
+    pid,
+    viewers: getViews(pid),
+  });
+};
 
 // put logic here to detect whether the specified origin is allowed.
 const originIsAllowed = (origin) => true;
 app.on('request', (request) => {
   if (!originIsAllowed(request.origin)) {
-    // Make sure we only accept requests from an allowed origin
     request.reject();
-    // console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
     return;
   }
   const connection = request.accept('echo-protocol', request.origin);
-  // console.log((new Date()) + ' Connection accepted.');
   connection.on('message', (message) => {
     if (message.type === 'utf8') {
-      // console.log('Received Message: ' + message.utf8Data);
+      const data = JSON.parse(message.utf8Data);
+      switch (data.action) {
+        case 'INCREMENT_VIEW': {
+          incrementView(data.pid);
+          update(data.pid);
+          break;
+        };
+        case 'DECREMENT_VIEW': {
+          decrementView(data.pid);
+          update(data.pid);
+          break;
+        }
+        default: {
+          console.log('default');
+        }
+      }
       connection.sendUTF(message.utf8Data);
     } else if (message.type === 'binary') {
-      // console.log('Received Binary Message of ' + message.binaryData.length + ' bytes');
       connection.sendBytes(message.binaryData);
     }
   });
   connection.on('close', (reasonCode, description) => {
-    // console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
   });
 });
 
