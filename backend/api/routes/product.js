@@ -38,7 +38,7 @@ router.get('/:productId', async (req, res) => {
             { $inc: { views: 1 } },
             { returnNewDocument: true },
           );
-        if (product.ok === 1) {
+        if (product.value !== null) {
           res.json(product.value).end();
         } else {
           res.sendStatus(400).end();
