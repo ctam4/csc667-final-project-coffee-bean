@@ -40,16 +40,14 @@ const theme = createMuiTheme({
 
 ReactDOM.hydrate(
   <React.StrictMode>
-
     <ReduxProvider store={store}>
-  <ThemeProvider theme={theme}>
-      <CookiesProvider>
-        <CssBaseline />
-        <App />
-      </CookiesProvider>
-  </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CookiesProvider>
+          <CssBaseline />
+          <App />
+        </CookiesProvider>
+      </ThemeProvider>
     </ReduxProvider>
-
   </React.StrictMode>,
   document.getElementById('react-root'),
 );
