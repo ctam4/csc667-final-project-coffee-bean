@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Avatar, Button, TextField, Grid, Typography, Container, Paper,
+  FormControl, MenuItem, Select, InputLabel,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Redirect, Link } from 'react-router-dom';
@@ -33,6 +34,7 @@ const SignUp = () => {
   const [cookies, setCookie] = useCookies(['token']);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
   const [redirect, setRedirect] = useState('');
 
   const handleSubmission = async (e) => {
@@ -47,6 +49,7 @@ const SignUp = () => {
         body: JSON.stringify({
           email: email.toLowerCase(),
           password,
+          role,
         }),
       })
         .then((res) => {
@@ -82,6 +85,23 @@ const SignUp = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField variant="outlined" required fullWidth name="password" label="Password" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl variant="outlined" required fullWidth>
+                  <InputLabel id="role-label">Role</InputLabel>
+                  <Select
+                    labelId="role-label"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    label="Role"
+                  >
+                    <MenuItem value="" disabled>
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={'buyer'}>Buyer</MenuItem>
+                    <MenuItem value={'seller'}>Seller</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <Button type="submit" fullWidth variant="contained" color="primary">Sign Up</Button>
