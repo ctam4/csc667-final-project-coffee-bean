@@ -45,11 +45,7 @@ const CheckOutItem = ({
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">{name}</Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            {quantity}
-            {' '}
-            &times;
-            {' '}
-            {ccyFormat(price)}
+            {`${quantity} `}&times;{` ${ccyFormat(price)}`}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
