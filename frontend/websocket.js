@@ -1,8 +1,6 @@
-import { client as WebSocketClient } from 'websocket';
+import { w3cwebsocket as W3CWebsocket } from 'websocket';
 
-const client = new WebSocketClient();
-
-let websocketUrl = `ws://${process.env.WEBSOCKET_HOST}` || window.location.hostname;
+let websocketUrl = `ws://${process.env.WEBSOCKET_HOST || window.location.hostname}`;
 let port;
 switch (window.location.protocol) {
   case 'http:':
@@ -18,36 +16,34 @@ switch (window.location.protocol) {
     }
     break;
 }
-websocketUrl += '/';
 
-export default client.connect(websocketUrl, 'echo-protocol');
+export default new W3CWebsocket(websocketUrl, 'echo-protocol');
 
 /*
-client.on('connectFailed', function(error) {
-  console.log('Connect Error: ' + error.toString());
-});
+client.onerror = function() {
+    console.log('Connection Error');
+};
 
-client.on('connect', function(connection) {
-  console.log('WebSocket Client Connected');
-  connection.on('error', function(error) {
-    console.log('Connection Error: ' + error.toString());
-  });
-  connection.on('close', function() {
-    console.log('echo-protocol Connection Closed');
-  });
-  connection.on('message', function(message) {
-    if (message.type === 'utf8') {
-      console.log('Received: '' + message.utf8Data + ''');
-    }
-  });
+client.onopen = function() {
+    console.log('WebSocket Client Connected');
 
-  function sendNumber() {
-    if (connection.connected) {
-      var number = Math.round(Math.random() * 0xFFFFFF);
-      connection.sendUTF(number.toString());
-      setTimeout(sendNumber, 1000);
+    function sendNumber() {
+        if (client.readyState === client.OPEN) {
+            var number = Math.round(Math.random() * 0xFFFFFF);
+            client.send(number.toString());
+            setTimeout(sendNumber, 1000);
+        }
     }
-  }
-  sendNumber();
-});
+    sendNumber();
+};
+
+client.onclose = function() {
+    console.log('echo-protocol Client Closed');
+};
+
+client.onmessage = function(e) {
+    if (typeof e.data === 'string') {
+        console.log("Received: '" + e.data + "'");
+    }
+};
 */
