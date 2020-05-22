@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
 
 const LogIn = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const [cookies, setCookie] = useCookies(['token']);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -60,6 +62,8 @@ const LogIn = () => {
             }
           } else {
             setCookie('token', token);
+            setCookie('isLoggedIn', true);
+            dispatch(setIsLoggedIn(true));
             setRedirect('/');
           }
         })

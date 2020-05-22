@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createStore, applyMiddleware, compose } from 'redux';
+import { CookiesProvider } from 'react-cookie';
 import reduxThunk from 'redux-thunk';
 import { red } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -39,12 +40,16 @@ const theme = createMuiTheme({
 
 ReactDOM.hydrate(
   <React.StrictMode>
+
     <ReduxProvider store={store}>
-      <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
+      <CookiesProvider>
         <CssBaseline />
         <App />
-      </ThemeProvider>
+      </CookiesProvider>
+  </ThemeProvider>
     </ReduxProvider>
+
   </React.StrictMode>,
   document.getElementById('react-root'),
 );
