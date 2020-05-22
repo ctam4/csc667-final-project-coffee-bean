@@ -6,6 +6,8 @@ const kafka = require('../kafka.js');
 const mongodb = require('../mongodb.js');
 const { transporter, fromEmail } = require('../nodemailer.js');
 
+const objectId = require('mongodb').ObjectID;
+
 async function sendReceipt(items, receiptID, toEmail) {
   const newItems = items.join('\n');
   await transporter.sendMail({
@@ -73,7 +75,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:orderId', async (req, res) => {
-  const { orderId } = req.param;
+  const { orderId } = req.params;
   const params = req.query;
   if (Object.keys(params).length === 1) {
     const { token } = params;
@@ -85,11 +87,10 @@ router.get('/:orderId', async (req, res) => {
         res.json(
           await db
             .collection('orders')
-            .find({
+            .findOne({
               email: decoded[0],
-              _id: orderId,
-            })
-            .toArray(),
+              _id: objectId(orderId),
+            }),
         ).end();
       })
       .catch(() => res.sendStatus(500).end());
@@ -102,8 +103,7 @@ router.post('/', async (req, res) => {
   const params = req.body;
   // validate params
   if (Object.keys(params).length === 2 && 'items' in params) {
-    const { token } = params;
-    const { items } = params;
+    const { token, items } = params;
     if (Array.isArray(items)) {
       // decode base64 token to two items
       const decoded = Buffer.from(token, 'base64').toString().split(':');
@@ -113,6 +113,7 @@ router.post('/', async (req, res) => {
             .collection('orders')
             .insert({
               email: decoded[0],
+              date: (new Date()).toISOString(),
               items,
             });
           sendReceipt(items, orders.insertedIds[0], decoded[0]);
