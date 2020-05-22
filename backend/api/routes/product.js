@@ -5,6 +5,8 @@ const redis = require('../redis.js');
 const kafka = require('../kafka.js');
 const mongodb = require('../mongodb.js');
 
+const objectId = require('mongodb').ObjectID;
+
 router.get('/', async (req, res) => {
   const params = req.query;
   // validate params
@@ -26,7 +28,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:productId', async (req, res) => {
-  const { productId } = req.param;
+  const { productId } = req.params;
   const params = req.query;
   if (Object.keys(params).length === 0) {
     await mongodb
@@ -34,7 +36,7 @@ router.get('/:productId', async (req, res) => {
         const product = await db
           .collection('products')
           .findOneAndUpdate(
-            { productId },
+            { productId: objectId(productId) },
             { $inc: { views: 1 } },
             { returnNewDocument: true },
           );
