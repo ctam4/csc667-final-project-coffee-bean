@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useParams } from 'react-router-dom';
+import Axios from 'axios';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
 } from '@material-ui/core';
+
+import apiUrl from '../api';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +39,9 @@ function subtotal(items) {
 
 const SingleOrder = (props) => {
   const classes = useStyles();
-
+  const [cookies] = useCookies(['token']);
+  const { orderId } = useParams();
+  const [date, setDate] = useState((new Date).toISOString());
   const [rows, setRows] = useState([]);
 
   const invoiceSubtotal = subtotal(rows);
@@ -42,12 +49,20 @@ const SingleOrder = (props) => {
   const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
   const load = async () => {
-    // TODO fetch
-    setRows([
-      createRow('Paperclips (Box)', 100, 1.15),
-      createRow('Paper (Case)', 10, 45.99),
-      createRow('Waste Basket', 2, 17.99),
-    ]);
+    try {
+      const response = await Axios.get(`${apiUrl}order/${orderId}?token=${cookies.token}`);
+      if (response.status === 200) {
+        const response2 = await Axios.get(`${apiUrl}product`);
+        if (response2.status === 200) {
+          setRows(response.data.items.map((item) => {
+            const product = response2.data.find((item2) => item2._id === item.productId);
+            return createRow(product.name, item.price, item.quantity);
+          }));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -63,9 +78,7 @@ const SingleOrder = (props) => {
               <Table stickyHeader>
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" colSpan={2}>
-                      Order #{}
-                    </TableCell>
+                    <TableCell colSpan={2}>{`Order #${orderId} (Placed on ${date})`}</TableCell>
                     <TableCell align="right" colSpan={2}>Price</TableCell>
                   </TableRow>
                   <TableRow>
@@ -90,7 +103,7 @@ const SingleOrder = (props) => {
                     <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Tax ({`${(TAX_RATE * 100).toFixed(0)} %`})</TableCell>
+                    <TableCell>Tax ({`${(TAX_RATE * 100).toFixed(0)}%`})</TableCell>
                     <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
                   </TableRow>
                   <TableRow>

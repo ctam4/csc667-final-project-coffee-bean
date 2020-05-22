@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import Axios from 'axios';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +12,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 import OrderDetails from './components/order-history/OrderDetails';
+
+import apiUrl from '../api';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,17 +35,12 @@ function ccyFormat(num) {
   return `$${num.toFixed(2)}`;
 }
 
-function createData(id, date, total) {
+function createData(orderId, date, total, items) {
   return {
-    id,
+    orderId,
     date,
     total,
-    items: [
-      { image: '', name: 'hello world', price: 12.00, quantity: 3 },
-      { image: '', name: 'bye world', price: 12.00, quantity: 3 },
-      { image: '', name: 'world', price: 1.00, quantity: 1 },
-      { image: '', name: 'surcharge', price: 13.00, quantity: 1 },
-    ],
+    items,
   };
 }
 
@@ -59,7 +58,7 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">{row.id}</TableCell>
+        <TableCell component="th" scope="row">{row.orderId}</TableCell>
         <TableCell>{row.date}</TableCell>
         <TableCell align="right">{ccyFormat(row.total)}</TableCell>
       </TableRow>
@@ -78,7 +77,7 @@ function Row(props) {
 
 Row.propTypes = {
   row: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    orderId: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
     total: PropTypes.number.isRequired,
     items: PropTypes.arrayOf(
@@ -92,26 +91,35 @@ Row.propTypes = {
   }).isRequired,
 };
 
-const OrdersList = () => {
+const OrderHistory = () => {
   const classes = useStyles();
-
+  const [cookies] = useCookies(['token']);
   const [rows, setRows] = useState([]);
 
   const load = async () => {
-    // TODO fetch
-    setRows([
-      createData('1', 'date', 6.0),
-      createData('2', 'date', 6.0),
-      createData('3', 'date', 6.0),
-      createData('4', 'date', 6.0),
-      createData('5', 'date', 6.0),
-      createData('6', 'date', 6.0),
-      createData('7', 'date', 6.0),
-      createData('8', 'date', 6.0),
-      createData('9', 'date', 6.0),
-      createData('10', 'date', 6.0),
-      createData('11', 'date', 6.0),
-    ]);
+    try {
+      const response = await Axios.get(`${apiUrl}order?token=${cookies.token}`);
+      if (response.status === 200) {
+        const response2 = await Axios.get(`${apiUrl}product`);
+        if (response2.status === 200) {
+          setRows(response.data.map((item) => {
+            const total = item.items.reduce((accumulator, item2) => accumulator + item2.price * item2.quantity, 0);
+            const items = item.items.map((item2) => {
+              const product = response2.data.find((item3) => item3._id === item2.productId);
+              return {
+                name: product.name,
+                image: product.image,
+                price: item2.price,
+                quantity: item2.quantity,
+              };
+            });
+            return createData(item._id, item.date, total, items);
+          }));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -147,4 +155,4 @@ const OrdersList = () => {
   );
 };
 
-export default OrdersList;
+export default OrderHistory;
