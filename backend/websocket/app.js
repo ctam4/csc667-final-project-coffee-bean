@@ -45,19 +45,17 @@ app.on('request', (request) => {
     if (message.type === 'utf8') {
       const data = JSON.parse(message.utf8Data);
       switch (data.action) {
-        case 'INCREMENT_VIEW': {
+        case 'INCREMENT_VIEW':
           incrementView(data.pid);
           update(data.pid);
           break;
-        };
-        case 'DECREMENT_VIEW': {
+        case 'DECREMENT_VIEW':
           decrementView(data.pid);
           update(data.pid);
           break;
-        }
-        default: {
+        default:
           console.log('default');
-        }
+          break;
       }
       connection.sendUTF(message.utf8Data);
     } else if (message.type === 'binary') {
