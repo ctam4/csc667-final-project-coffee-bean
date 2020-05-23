@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import PrivateRoute from './components/privateroute/PrivateRoute'
+import PrivateRoute from './components/privateroute/PrivateRoute';
 import SignUp from './SignUp';
 import LogIn from './LogIn';
 import Menu from './Menu';
@@ -9,6 +9,8 @@ import Home from './Home';
 import OrderHistory from './OrderHistory';
 import SingleOrder from './SingleOrder';
 import CheckOut from './CheckOut';
+
+// when rendering seller route add seller type to the privateroute
 
 const Routes = () => (
   <Switch>
@@ -18,6 +20,18 @@ const Routes = () => (
     <Route path="/menu" exact component={Menu} />
     <Route path="/order-history" exact component={OrderHistory} />
     <Route path="/order-history/:orderId" exact component={SingleOrder} />
+    <PrivateRoute
+      path="/order-history"
+      exact
+      component={OrdersList}
+      type="buyer"
+    />
+    <PrivateRoute
+      path="/order-history/:id"
+      exact
+      component={SingleOrder}
+      type="buyer"
+    />
     <Route path="/checkout" exact component={CheckOut} />
   </Switch>
 );
