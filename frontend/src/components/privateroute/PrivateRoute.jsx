@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
+import Axios from 'axios';
 import apiUrl from '../../../api';
 
 const PrivateRoute = ({ component: Component, type, ...rest }) => {
@@ -14,12 +14,9 @@ const PrivateRoute = ({ component: Component, type, ...rest }) => {
 
   const getRole = async () => {
     try {
-      const res = await axios.get(`${apiUrl}auth`, {
-        params: { token: cookies.token },
-      });
-
-      if (res.status === 200) {
-        setCookie('role', res.data.role);
+      const response = await Axios.get(`${apiUrl}auth?token=${cookies.token}`);
+      if (response.status === 200) {
+        setCookie('role', response.data.role);
       }
     } catch (error) {
       console.log(error);
