@@ -83,7 +83,7 @@ router.get('/', async (req, res) => {
                   email: 0,
                   token: 0,
                   role: 1,
-                }
+                },
               ),
           ).end();
         })

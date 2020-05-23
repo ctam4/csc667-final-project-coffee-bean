@@ -98,8 +98,8 @@ const SignUp = () => {
                     <MenuItem value="" disabled>
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={'buyer'}>Buyer</MenuItem>
-                    <MenuItem value={'seller'}>Seller</MenuItem>
+                    <MenuItem value="buyer">Buyer</MenuItem>
+                    <MenuItem value="seller">Seller</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

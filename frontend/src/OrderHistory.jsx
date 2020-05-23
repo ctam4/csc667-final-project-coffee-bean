@@ -51,7 +51,7 @@ function Row(props) {
   const [open, setOpen] = useState(false);
 
   return (
-    <React.Fragment>
+    <>
       <TableRow className={classes.root}>
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -71,7 +71,7 @@ function Row(props) {
           </TableCell>
         )}
       </TableRow>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -127,7 +127,7 @@ const OrderHistory = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <Container component="main" maxWidth="lg">
         <Paper className={classes.paper} elevation={0}>
           <Paper elevation={1}>
@@ -151,7 +151,7 @@ const OrderHistory = () => {
           </Paper>
         </Paper>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 

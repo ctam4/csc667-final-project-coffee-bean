@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Card, CardMedia, CardContent, Typography } from '@material-ui/core';
+import {
+  Grid, Card, CardMedia, CardContent, Typography,
+} from '@material-ui/core';
 
 const useStyles = makeStyles({
   media: {
@@ -17,10 +19,12 @@ function ccyFormat(num) {
 const OrderItem = (props) => {
   const classes = useStyles();
 
-  const { image, name, price, quantity } = props;
+  const {
+    image, name, price, quantity,
+  } = props;
 
   return (
-    <React.Fragment>
+    <>
       <Grid item lg={2} md={4} xs={6}>
         <Card>
           <CardMedia
@@ -34,7 +38,7 @@ const OrderItem = (props) => {
           </CardContent>
         </Card>
       </Grid>
-    </React.Fragment>
+    </>
   );
 };
 

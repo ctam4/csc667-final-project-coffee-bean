@@ -63,13 +63,11 @@ const CheckOut = () => {
     try {
       const response = await Axios.post(`${apiUrl}order`, {
         token: cookies.token,
-        items: items.map((item) => {
-          return {
-            productId: item.productId,
-            price: item.price,
-            quantity: item.quantity,
-          };
-        }),
+        items: items.map((item) => ({
+          productId: item.productId,
+          price: item.price,
+          quantity: item.quantity,
+        })),
       });
       if (response.status === 200) {
         dispatch(clearCart());

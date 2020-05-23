@@ -9,7 +9,7 @@ const OrderDetails = (props) => {
   const { items } = props;
 
   return (
-    <React.Fragment>
+    <>
       <Box margin={1}>
         <Typography variant="h6" gutterBottom component="div">Details</Typography>
         <Grid
@@ -24,7 +24,7 @@ const OrderDetails = (props) => {
           ))}
         </Grid>
       </Box>
-    </React.Fragment>
+    </>
   );
 };
 

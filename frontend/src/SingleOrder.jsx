@@ -30,7 +30,9 @@ function priceRow(qty, unit) {
 
 function createRow(desc, qty, unit) {
   const price = priceRow(qty, unit);
-  return { desc, qty, unit, price };
+  return {
+    desc, qty, unit, price,
+  };
 }
 
 function subtotal(items) {
@@ -41,7 +43,7 @@ const SingleOrder = (props) => {
   const classes = useStyles();
   const [cookies] = useCookies(['token']);
   const { orderId } = useParams();
-  const [date, setDate] = useState((new Date).toISOString());
+  const [date, setDate] = useState((new Date()).toISOString());
   const [rows, setRows] = useState([]);
 
   const invoiceSubtotal = subtotal(rows);
@@ -70,7 +72,7 @@ const SingleOrder = (props) => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <Container component="main" maxWidth="lg">
         <Paper className={classes.paper} elevation={0}>
           <Paper elevation={1}>
@@ -116,7 +118,7 @@ const SingleOrder = (props) => {
           </Paper>
         </Paper>
       </Container>
-    </React.Fragment>
+    </>
   );
 };
 
