@@ -14,23 +14,23 @@ import CheckOut from './CheckOut';
 
 const Routes = () => (
   <Switch>
-    <Route path='/' exact component={Home} />
-    <Route path='/signup' exact component={SignUp} />
-    <Route path='/login' exact component={LogIn} />
-    <Route path='/menu' exact component={Menu} />
+    <Route path="/" exact component={Home} />
+    <Route path="/signup" exact component={SignUp} />
+    <Route path="/login" exact component={LogIn} />
+    <Route path="/menu" exact component={Menu} />
     <PrivateRoute
-      path='/order-history'
+      path="/order-history"
       exact
       component={OrdersList}
-      type='buyer'
+      type="buyer"
     />
     <PrivateRoute
-      path='/order-history/:id'
+      path="/order-history/:id"
       exact
       component={SingleOrder}
-      type='buyer'
+      type="buyer"
     />
-    <Route path='/checkout' exact component={CheckOut} />
+    <Route path="/checkout" exact component={CheckOut} />
   </Switch>
 );
 
