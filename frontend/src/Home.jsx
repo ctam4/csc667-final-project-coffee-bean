@@ -74,7 +74,7 @@ export default function RecipeReviewCard() {
       const response = await Axios.get(`${apiUrl}product`)
       if (response.status === 200) {
         if (response.data.length === 0) {
-          await Promoise.all([
+          await Promise.all([
             dataDump.forEach(async (product) => {
               await Axios.post(`${apiUrl}product`, product);
             }),
