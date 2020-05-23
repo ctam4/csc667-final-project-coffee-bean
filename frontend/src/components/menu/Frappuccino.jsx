@@ -52,7 +52,7 @@ const Frappuccino = () => {
   };
 
   return (
-    <Grid className={classes.mainDiv}>
+    <Grid >
       <Grid
         container
         direction="row-reverse"
@@ -67,10 +67,11 @@ const Frappuccino = () => {
         Coffee Frappuccino
       </Typography>
       <Divider />
-      <div className={classes.root}>
-        <Tooltip
+      <Grid container direction="row" justify="center" alignItems="center" spacing={10} className={classes.root} >
+      <Grid item>
+      <Tooltip
           onClick={handleToggle('Mocha Cookie Crumble')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -79,10 +80,12 @@ const Frappuccino = () => {
             className={classes.large}
           />
         </Tooltip>
-        <Typography display="block">Mocha Cookie</Typography>
+        <Typography align="center" display="block">Mocha Cookie</Typography>
+        </Grid>
+        <Grid item>
         <Tooltip
           onClick={handleToggle('Caramel Ribbon')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -91,12 +94,12 @@ const Frappuccino = () => {
             src="https://globalassets.starbucks.com/assets/bdc7fcf962884211ab83918d34f73393.jpg?impolicy=1by1_wide_1242"
           />
         </Tooltip>
-        <Typography>Caramel Ribbon</Typography>
-      </div>
-      <div className={classes.root}>
+        <Typography align="center">Caramel Ribbon</Typography>
+        </Grid>
+        <Grid item>
         <Tooltip
           onClick={handleToggle('Caffè Vanilla')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -105,10 +108,14 @@ const Frappuccino = () => {
             className={classes.large}
           />
         </Tooltip>
-        <Typography>Caffè Vanilla</Typography>
+        <Typography align="center">Caffè Vanilla</Typography>
+        </Grid>
+      </Grid>
+      <Grid container direction="row" justify="center" alignItems="center" spacing={10} className={classes.root} >
+      <Grid item>
         <Tooltip
           onClick={handleToggle('Coffee Frappuccino')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -117,26 +124,29 @@ const Frappuccino = () => {
             src="https://globalassets.starbucks.com/assets/2cf55066b3ec4547b452aebffe0870cf.jpg?impolicy=1by1_wide_1242"
           />
         </Tooltip>
-        <Typography>Coffee Frapuccino</Typography>
-      </div>
-      <div className={classes.root}>
-        <Tooltip onClick={handleToggle('Java Chip')} title="Add" interactive>
+        <Typography align="center">Coffee Frapuccino</Typography>
+        </Grid>
+        <Grid item>
+        <Tooltip onClick={handleToggle('Java Chip')} title="Out of Stock" interactive>
           <Avatar
             alt="Java Chip"
             src="https://globalassets.starbucks.com/assets/87ab7a1c8b7b492cbc1d5c5d44e1007b.jpg?impolicy=1by1_wide_1242"
             className={classes.large}
           />
         </Tooltip>
-        <Typography>Java Chip</Typography>
-        <Tooltip onClick={handleToggle('Caramel')} title="Add" interactive>
+        <Typography align="center">Java Chip</Typography>
+        </Grid>
+        <Grid item>
+        <Tooltip onClick={handleToggle('Caramel')} title="Out of Stock" interactive>
           <Avatar
             className={classes.large}
             alt="Caramel"
             src="https://globalassets.starbucks.com/assets/bdc7fcf962884211ab83918d34f73393.jpg?impolicy=1by1_wide_1242"
           />
         </Tooltip>
-        <Typography>Caramel Blended</Typography>
-      </div>
+        <Typography align="center">Caramel Blended</Typography>
+        </Grid>
+      </Grid>
     </Grid>
   );
 };

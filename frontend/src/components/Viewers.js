@@ -38,7 +38,6 @@ const Viewers = ({ productId }) => {
 
   return (
     <div>
-      {productId}
       <div>
         Total Viewers:
         {viewers}

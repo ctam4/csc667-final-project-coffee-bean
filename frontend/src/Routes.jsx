@@ -6,6 +6,7 @@ import SignUp from './SignUp';
 import LogIn from './LogIn';
 import Menu from './Menu';
 import Home from './Home';
+import SingleProduct from './SingleProduct';
 import OrderHistory from './OrderHistory';
 import SingleOrder from './SingleOrder';
 import CheckOut from './CheckOut';
@@ -18,6 +19,7 @@ const Routes = () => (
     <Route path="/signup" exact component={SignUp} />
     <Route path="/login" exact component={LogIn} />
     <Route path="/menu" exact component={Menu} />
+    <Route path="/menu/:productId" component={SingleProduct} />
     <PrivateRoute
       path="/order-history"
       exact
