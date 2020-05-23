@@ -5,10 +5,11 @@ import ws from '../../websocket';
 const Viewers = ({ productId }) => {
   const [viewers, setViewers] = useState(0);
 
+  const decrementView = () => {
+    ws.send(JSON.stringify({ action: 'DECREMENT_VIEW', pid: productId }));
+  };
+
   useEffect(() => {
-    const decrementView = () => {
-      ws.send(JSON.stringify({ action: 'DECREMENT_VIEW', pid: productId }));
-    };
     window.addEventListener('beforeunload', decrementView);
 
     ws.onopen = () => {
@@ -17,29 +18,24 @@ const Viewers = ({ productId }) => {
 
     ws.onmessage = (message) => {
       const messageObject = JSON.parse(message.data);
-      console.log(messageObject);
       switch (messageObject.type) {
-        case 'UPDATED_VIEW': {
+        case 'UPDATED_VIEW':
           if (messageObject.pid === productId) {
             setViewers(messageObject.viewers);
           }
           break;
-        }
-        default: {
+        default:
           console.log('default');
-        }
+          break;
       }
     };
 
-    return () => {
-      decrementView();
-      window.removeEventListener('beforeunload', decrementView);
-    };
-  });
+    decrementView();
+    window.removeEventListener('beforeunload', decrementView);
+  }, []);
 
   return (
     <div>
-      Component on page:
       {productId}
       <div>
         Total Viewers:
@@ -50,11 +46,11 @@ const Viewers = ({ productId }) => {
 };
 
 Viewers.defaultProps = {
-  productId: 0,
+  productId: '0',
 };
 
 Viewers.propTypes = {
-  productId: PropTypes.number,
+  productId: PropTypes.string.isRequired,
 };
 
 export default Viewers;
