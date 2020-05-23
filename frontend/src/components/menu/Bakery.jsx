@@ -55,7 +55,7 @@ const Bakery = () => {
   };
 
   return (
-    <Grid className={classes.mainDiv}>
+    <Grid>
       <Grid
         container
         direction="row-reverse"
@@ -70,8 +70,9 @@ const Bakery = () => {
         Bagels
       </Typography>
       <Divider />
-      <Grid container className={classes.root}>
-        <Tooltip onClick={handleToggle('Plain Bagel')} title="Add" interactive>
+      <Grid container direction="row" justify="center" alignItems="center" spacing={10} className={classes.root} >
+        <Grid item>
+        <Tooltip onClick={handleToggle('Plain Bagel')} title="Out of Stock" interactive>
           <Avatar
             alt="Plain Bagel"
             src="https://globalassets.starbucks.com/assets/2362e79aa0ab4c37a930956c67ab557a.jpg?impolicy=1by1_tight_288"
@@ -79,9 +80,11 @@ const Bakery = () => {
           />
         </Tooltip>
         <Typography display="block">Plain Bagel</Typography>
+        </Grid>
+        <Grid item>
         <Tooltip
           onClick={handleToggle('Cheese, Onion & Garlic')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -92,10 +95,10 @@ const Bakery = () => {
         </Tooltip>
         <Typography>Cheese, Onion & Garlic</Typography>
       </Grid>
-      <Grid className={classes.root}>
-        <Tooltip
+      <Grid item>
+      <Tooltip
           onClick={handleToggle('Blueberry Bagel')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -105,9 +108,11 @@ const Bakery = () => {
           />
         </Tooltip>
         <Typography> Blueberry </Typography>
-        <Tooltip
+      </Grid>
+      <Grid item>
+      <Tooltip
           onClick={handleToggle('Cinnamon Raisin')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -117,6 +122,7 @@ const Bakery = () => {
           />
         </Tooltip>
         <Typography>Cinnamon Raisin</Typography>
+      </Grid>
       </Grid>
     </Grid>
   );

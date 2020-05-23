@@ -52,7 +52,7 @@ const ColdCoffee = () => {
   };
 
   return (
-    <Grid className={classes.mainDiv}>
+    <Grid >
       <Grid
         container
         direction="row-reverse"
@@ -67,36 +67,42 @@ const ColdCoffee = () => {
         Cold Brews
       </Typography>
       <Divider />
-      <div className={classes.root}>
-        <Tooltip onClick={handleToggle('Salted Honey')} title="Add" interactive>
+      <Grid container direction="row" justify="center" alignItems="center" spacing={10} className={classes.root} >
+        <Grid item>
+        <Tooltip onClick={handleToggle('Salted Honey')} title="Out of Stock" interactive>
           <Avatar
             alt="Salted Honey"
             src="https://globalassets.starbucks.com/assets/1f3d15ed2b534aaab4cbc8fbf2b8cccb.jpg?impolicy=1by1_wide_1242"
             className={classes.large}
           />
         </Tooltip>
-        <Typography display="block">Salted Honey</Typography>
-        <Tooltip onClick={handleToggle('Nitro Cold')} title="Add" interactive>
+        <Typography align="center"display="block">Salted Honey</Typography>
+        </Grid><Grid item>
+        <Tooltip onClick={handleToggle('Nitro Cold')} title="Out of Stock" interactive>
           <Avatar
             className={classes.large}
             alt="Nitro cold"
             src="https://globalassets.starbucks.com/assets/1697f7c55887448684fed85ecdd98e44.jpg?impolicy=1by1_wide_1242"
           />
         </Tooltip>
-        <Typography>Nitro Cold</Typography>
-      </div>
-      <div className={classes.root}>
-        <Tooltip onClick={handleToggle('Salted Cream')} title="Add" interactive>
+        <Typography align="center">Nitro Cold</Typography>
+        </Grid>
+        <Grid item>
+        <Tooltip onClick={handleToggle('Salted Cream')} title="Out of Stock" interactive>
           <Avatar
             alt="Salted Cream"
             src="https://globalassets.starbucks.com/assets/6ffca0a4b4ec4af98d07c4e860baca45.jpg?impolicy=1by1_wide_1242"
             className={classes.large}
           />
         </Tooltip>
-        <Typography>Salted Cream</Typography>
+        <Typography align="center">Salted Cream</Typography>
+        </Grid>
+      </Grid>
+      <Grid container direction="row" justify="center" alignItems="center" spacing={10} className={classes.root} >
+       <Grid item>
         <Tooltip
           onClick={handleToggle('Reverse Nitro')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -105,12 +111,12 @@ const ColdCoffee = () => {
             src="https://globalassets.starbucks.com/assets/1697f7c55887448684fed85ecdd98e44.jpg?impolicy=1by1_wide_1242"
           />
         </Tooltip>
-        <Typography>Reverse Nitro</Typography>
-      </div>
-      <div className={classes.root}>
+        <Typography align="center">Reverse Nitro</Typography>
+        </Grid>
+        <Grid item>
         <Tooltip
           onClick={handleToggle('Vanilla Sweet')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -119,10 +125,12 @@ const ColdCoffee = () => {
             className={classes.large}
           />
         </Tooltip>
-        <Typography>Vanilla Sweet</Typography>
+        <Typography align="center">Vanilla Sweet</Typography>
+        </Grid>
+        <Grid item>
         <Tooltip
           onClick={handleToggle('Vanilla Sweet')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -131,8 +139,9 @@ const ColdCoffee = () => {
             src="https://globalassets.starbucks.com/assets/31d2824c896147fbaad4a1eac1ab1174.jpg?impolicy=1by1_wide_1242"
           />
         </Tooltip>
-        <Typography>Sweet Cream</Typography>
-      </div>
+        <Typography align="center">Sweet Cream</Typography>
+        </Grid>
+      </Grid>
     </Grid>
   );
 };

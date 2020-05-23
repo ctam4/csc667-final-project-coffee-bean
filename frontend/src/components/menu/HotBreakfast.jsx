@@ -67,18 +67,21 @@ const HotBreakfast = () => {
         Breakfast Sandwiches & Wraps
       </Typography>
       <Divider />
-      <div className={classes.root}>
-        <Tooltip onClick={handleToggle('Veggie Wrap')} title="Add" interactive>
+      <Grid container direction="row" justify="center" alignItems="center" spacing={10} className={classes.root} >
+        <Grid item>
+        <Tooltip onClick={handleToggle('Veggie Wrap')} title="Out of Stock" interactive>
           <Avatar
             alt="Veggie Wrap"
             src="https://globalassets.starbucks.com/assets/e476519ecaa9441c955b585840cc2524.jpg?impolicy=1by1_wide_1242"
             className={classes.large}
           />
         </Tooltip>
-        <Typography display="block">Veggie Wrap</Typography>
+        <Typography align="center"display="block">Veggie Wrap</Typography>
+        </Grid>
+        <Grid item>
         <Tooltip
           onClick={handleToggle('Bacon, Sausage & Egg Wrap')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -87,12 +90,12 @@ const HotBreakfast = () => {
             src="https://globalassets.starbucks.com/assets/27bd607e92354742bc8cf46b23f4ce39.jpg?impolicy=1by1_wide_1242"
           />
         </Tooltip>
-        <Typography>Bacon, Sausage & Egg Wrap</Typography>
-      </div>
-      <div className={classes.root}>
-        <Tooltip
+        <Typography align="center">Bacon,Sausage & Egg Wrap</Typography>
+      </Grid>
+      <Grid item>
+      <Tooltip
           onClick={handleToggle('Cheddar & Egg')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -101,10 +104,12 @@ const HotBreakfast = () => {
             className={classes.large}
           />
         </Tooltip>
-        <Typography>Cheddar Egg</Typography>
-        <Tooltip
+        <Typography align="center">Cheddar Egg</Typography>
+      </Grid>
+      <Grid item>
+      <Tooltip
           onClick={handleToggle('Bacon & Cage-Free Egg')}
-          title="Add"
+          title="Out of Stock"
           interactive
         >
           <Avatar
@@ -113,8 +118,9 @@ const HotBreakfast = () => {
             src="https://globalassets.starbucks.com/assets/b7e25a03655741869ced8dfde8c70659.jpg?impolicy=1by1_wide_1242"
           />
         </Tooltip>
-        <Typography> Bacon & Cage-Free Egg White</Typography>
-      </div>
+        <Typography align="center"> Bacon & Cage-Free Egg White</Typography>
+      </Grid>
+      </Grid>
     </Grid>
   );
 };
