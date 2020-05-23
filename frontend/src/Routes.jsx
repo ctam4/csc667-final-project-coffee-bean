@@ -31,7 +31,6 @@ const Routes = () => (
       type='buyer'
     />
     <Route path='/checkout' exact component={CheckOut} />
-    <Route path='/product/:id' exact component={SingleOrder} />
   </Switch>
 );
 
