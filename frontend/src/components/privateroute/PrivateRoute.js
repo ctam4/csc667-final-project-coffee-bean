@@ -9,11 +9,23 @@ import apiUrl from '../../../api';
 const PrivateRoute = ({ component: Component, type, ...rest }) => {
   const [cookies, setCookie] = useCookies(['isLoggedIn', 'token', 'role']);
   useEffect(() => {
-    axios
-      .get(`${apiUrl}auth`, { params: { token: cookies.token } })
-      .then((res) => setCookie('role', res.data.role));
+    getRole();
   }, []);
-  console.log(type);
+
+  const getRole = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}auth`, {
+        params: { token: cookies.token },
+      });
+
+      if (res.status === 200) {
+        setCookie('role', res.data.role);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Route
       {...rest}
@@ -44,8 +56,8 @@ PrivateRoute.defaultProps = {
 };
 
 PrivateRoute.propTypes = {
-  component: PropTypes.element,
-  type: PropTypes.string,
+  component: PropTypes.element.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default PrivateRoute;
