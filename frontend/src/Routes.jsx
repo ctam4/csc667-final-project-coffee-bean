@@ -18,16 +18,14 @@ const Routes = () => (
     <Route path="/signup" exact component={SignUp} />
     <Route path="/login" exact component={LogIn} />
     <Route path="/menu" exact component={Menu} />
-    <Route path="/order-history" exact component={OrderHistory} />
-    <Route path="/order-history/:orderId" exact component={SingleOrder} />
     <PrivateRoute
       path="/order-history"
       exact
-      component={OrdersList}
+      component={OrderHistory}
       type="buyer"
     />
     <PrivateRoute
-      path="/order-history/:id"
+      path="/order-history/:orderId"
       exact
       component={SingleOrder}
       type="buyer"
