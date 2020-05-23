@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import PropTypes from 'prop-types';
+import Axios from 'axios';
+
 import { Route, Redirect } from 'react-router-dom';
 
-import { useCookies } from 'react-cookie';
-import Axios from 'axios';
 import apiUrl from '../../../api';
 
 const PrivateRoute = ({ component: Component, type, ...rest }) => {
-  const [cookies, setCookie] = useCookies(['isLoggedIn', 'token', 'role']);
+  const [cookies, setCookie] = useCookies(['token', 'role']);
+
   useEffect(() => {
-    getRole();
+    if (cookies.token !== undefined && cookies.role === undefined) {
+      getRole();
+    }
   }, []);
 
   const getRole = async () => {
@@ -28,20 +32,17 @@ const PrivateRoute = ({ component: Component, type, ...rest }) => {
       {...rest}
       render={(props) => {
         if (
-          cookies.isLoggedIn
-          && cookies.role === 'buyer'
+          cookies.role === 'buyer'
           && type === 'buyer'
         ) {
           return <Component {...props} />;
-        }
-        if (
-          cookies.isLoggedIn
-          && cookies.role === 'seller'
+        } else if (
+          cookies.role === 'seller'
           && type === 'seller'
         ) {
           return <Component {...props} />;
         }
-        return <Redirect to={{ pathname: '/login' }} />;
+        return <Redirect to="/login" />;
       }}
     />
   );
