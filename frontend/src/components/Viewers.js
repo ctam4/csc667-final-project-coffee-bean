@@ -30,8 +30,10 @@ const Viewers = ({ productId }) => {
       }
     };
 
-    decrementView();
-    window.removeEventListener('beforeunload', decrementView);
+    return () => {
+      decrementView();
+      window.removeEventListener('beforeunload', decrementView);
+    };
   }, []);
 
   return (
