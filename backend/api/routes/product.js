@@ -36,7 +36,7 @@ router.get('/:productId', async (req, res) => {
         const product = await db
           .collection('products')
           .findOneAndUpdate(
-            { productId: objectId(productId) },
+            { _id: objectId(productId) },
             { $inc: { views: 1 } },
             { returnNewDocument: true },
           );
