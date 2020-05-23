@@ -10,6 +10,7 @@ import SingleProduct from './SingleProduct';
 import OrderHistory from './OrderHistory';
 import SingleOrder from './SingleOrder';
 import CheckOut from './CheckOut';
+import Inventory from './Inventory';
 
 // when rendering seller route add seller type to the privateroute
 
@@ -33,6 +34,7 @@ const Routes = () => (
       type="buyer"
     />
     <Route path="/checkout" exact component={CheckOut} />
+    <Route path="/inventory" exact component={Inventory} />
   </Switch>
 );
 
