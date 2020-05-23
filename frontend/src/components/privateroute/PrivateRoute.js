@@ -40,10 +40,12 @@ const PrivateRoute = ({ component: Component, type, ...rest }) => {
 
 PrivateRoute.defaultProps = {
   component: {},
+  type: '',
 };
 
 PrivateRoute.propTypes = {
   component: PropTypes.element,
+  type: PropTypes.string,
 };
 
 export default PrivateRoute;
