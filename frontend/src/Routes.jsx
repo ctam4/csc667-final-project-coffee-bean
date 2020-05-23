@@ -33,8 +33,18 @@ const Routes = () => (
       component={SingleOrder}
       type="buyer"
     />
-    <Route path="/checkout" exact component={CheckOut} />
-    <Route path="/inventory" exact component={Inventory} />
+    <PrivateRoute
+      path="/checkout"
+      exact
+      component={CheckOut}
+      type="buyer"
+    />
+    <PrivateRoute
+      path="/inventory"
+      exact
+      component={Inventory}
+      type="seller"
+    />
   </Switch>
 );
 
