@@ -43,7 +43,7 @@ const SingleOrder = (props) => {
   const classes = useStyles();
   const [cookies] = useCookies(['token']);
   const { orderId } = useParams();
-  const [date, setDate] = useState((new Date()).toISOString());
+  const [date] = useState((new Date()).toISOString());
   const [rows, setRows] = useState([]);
 
   const invoiceSubtotal = subtotal(rows);
@@ -58,7 +58,7 @@ const SingleOrder = (props) => {
         if (response2.status === 200) {
           setRows(response.data.items.map((item) => {
             const product = response2.data.find((item2) => item2._id === item.productId);
-            return createRow(product.name, item.price, item.quantity);
+            return createRow(product.name, item.quantity, item.price);
           }));
         }
       }
@@ -78,15 +78,12 @@ const SingleOrder = (props) => {
           <Paper elevation={1}>
             <TableContainer>
               <Table stickyHeader>
+                <caption>{`Order #${orderId} (Placed on ${date})`}</caption>
                 <TableHead>
-                  <TableRow>
-                    <TableCell colSpan={2}>{`Order #${orderId} (Placed on ${date})`}</TableCell>
-                    <TableCell align="right" colSpan={2}>Price</TableCell>
-                  </TableRow>
                   <TableRow>
                     <TableCell>Name</TableCell>
                     <TableCell align="right">Quantity</TableCell>
-                    <TableCell align="right">Unit</TableCell>
+                    <TableCell align="right">Unit Price</TableCell>
                     <TableCell align="right">Sum</TableCell>
                   </TableRow>
                 </TableHead>
@@ -95,7 +92,7 @@ const SingleOrder = (props) => {
                     <TableRow key={row.desc}>
                       <TableCell>{row.desc}</TableCell>
                       <TableCell align="right">{row.qty}</TableCell>
-                      <TableCell align="right">{row.unit}</TableCell>
+                      <TableCell align="right">{ccyFormat(row.unit)}</TableCell>
                       <TableCell align="right">{ccyFormat(row.price)}</TableCell>
                     </TableRow>
                   ))}
